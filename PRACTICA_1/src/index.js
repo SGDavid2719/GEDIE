@@ -3,6 +3,10 @@ const morgan = require("morgan");
 const path = require("path");
 const app = express();
 
+// Fav icon
+var favicon = require("serve-favicon");
+app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
+
 // settings
 app.set("port", 3000);
 app.set("views", path.join(__dirname, "views"));
@@ -17,6 +21,7 @@ app.use(require("./routes"));
 // static files
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "css")));
+app.use(express.static(path.join(__dirname, "js")));
 
 // listening the server
 app.listen(app.get("port"), () => {

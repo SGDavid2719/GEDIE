@@ -7,31 +7,42 @@
 		<title><%=title%></title>
 		<%- include('partials/head'); -%>
 		<link rel="stylesheet" href="/index.css" />
+		<script src="/video.js"></script>
 	</head>
 	<%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
-	<body class="d-flex flex-column min-vh-100">
-		<div id="container">
-			<div class="row video">
+	<body class="d-flex flex-column min-vh-100 text-white">
+		<div id="container" class="mx-4">
+			<div class="row mb-5">
 				<div class="col">
-					<div id="video-container">
-						<video id="video_with_controls" width="320" controls autobuffer>
-							<source src="" type='video/webm; codecs="vp8,vorbis"' />
-							<source src="" type="video/mp4" />
-							<source src="" type='video/ogg; codecs="theora, vorbis"' />
+					<div id="video-container" class="d-flex justify-content-center">
+						<video id="video_with_controls" controls autobuffer>
+							<source
+								src="/video/pelis.webm"
+								type='video/webm; codecs="vp8,vorbis"'
+							/>
+							<source src="/video/pelis.mp4" type="video/mp4" />
+							<source
+								src="/video/pelis.ogv"
+								type='video/ogg; codecs="theora, vorbis"'
+							/>
 							Your browser does not support the video tag
 						</video>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6 col-sm-12">
+				<div class="col-md-8 col-sm-12">
 					<div id="video-info">
-						<h3>Soy la descripción</h3>
+						<h5 id="videos-title">VIDEO'S TITLE</h5>
+						<hr />
+						<p id="videos-info">Info</p>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-12">
+				<div class="col-md-4 col-sm-12">
 					<div id="other-videos">
-						<h3>Soy otro video</h3>
+						<h5>OTHER VIDEOS</h5>
+						<hr />
+						<p>Videos</p>
 					</div>
 				</div>
 			</div>

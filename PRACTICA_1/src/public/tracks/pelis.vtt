@@ -1,0 +1,197 @@
+WEBVTT
+
+intro
+00:00:00.000 --> 00:00:23.079
+{
+"titulo": "Titulo de la pelicula", 
+"sinopsis": "Pequeña sinopsis de la película", 
+"año": "Año",
+"genero": "Género",
+"duracion": "Duración",
+"director": "Director",
+"premios": "Lista de premios",
+"voto_fa": "X/10",
+"voto_sensac": "X/5"
+}
+
+12
+00:00:23.080 --> 00:00:55.048
+{
+"titulo": "El Grán Hotel Budapest", 
+"sinopsis": "Gustave H. (Ralph Fiennes), un legendario conserje de un famoso hotel europeo de entreguerras, entabla amistad con Zero Moustafa (Tony Revolori), un joven empleado al que convierte en su protegido. La historia trata sobre el robo y la recuperación de una pintura renacentista de valor incalculable y sobre la batalla que enfrenta a los miembros de una familia por una inmensa fortuna. Como telón de fondo, los levantamientos que transformaron Europa durante la primera mitad del siglo XX.", 
+"año": 2014,
+"genero": "Comedia, Aventuras",
+"duracion": "1h 39m",
+"director": "Wes Anderson",
+"premios": "4 Premios Oscar: Mejor bso, dir. artística, vestuario y maquillaje<br>Globos de Oro: Mejor película - Comedia o musical<br>Premios BAFTA: 5 premios incluyendo mejor guión original<br>Festival de Berlín: Gran Premio del Jurado<br>Círculo de Críticos de Nueva York: Mejor guión<br>Asociación de Críticos de Los Angeles: Mejor guion y diseño de producción",
+"voto_fa": "7,3/10",
+"voto_sensac": "3,9/5"
+}
+
+11
+00:00:55.469 --> 00:01:25.450
+{
+"titulo": "Lost in Translation (Perdidos en Tokyo)", 
+"sinopsis": "Bob Harris, un actor norteamericano en decadencia, acepta una oferta para hacer un anuncio de whisky japonés en Tokio. Está atravesando una aguda crisis y pasa gran parte del tiempo libre en el bar del hotel. Y, precisamente allí, conoce a Charlotte, una joven casada con un fotógrafo que ha ido a Tokio a hacer un reportaje; pero mientras él trabaja, su mujer se aburre mortalmente. Además del aturdimiento que les producen las imágenes y los sonidos de la inmensa ciudad, Bob y Charlotte comparten también el vacío de sus vidas. Poco a poco se hacen amigos y, a medida que exploran la ciudad juntos, empiezan a preguntarse si su amistad podría transformarse en algo más.", 
+"año": 2003,
+"genero": "Romance/Drama",
+"duracion": "1h 44m",
+"director": "Sofia Coppola",
+"premios": "Oscar: Mejor guión original. 4 nominaciones<br>Globos de Oro: Mejor película comedia, actor, guión. 5 nominaciones<br>3 premios BAFTA: Mejor actor (Murray), actriz (Johansson) y montaje. 8 nom.",
+"voto_fa": "7,1/10",
+"voto_sensac": "2,9/5"
+}
+
+10
+00:01:25.920 --> 00:01:56.605
+{
+"titulo": "El Laberinto del Fauno", 
+"sinopsis": "Año 1944, posguerra española. Ofelia (Ivana Baquero) y su madre, Carmen (Ariadna Gil), que está embarazada, se trasladan a un pequeño pueblo al que ha sido destinado el nuevo marido de Carmen, Vidal (Sergi López), un cruel capitán del ejército franquista por el que la niña no siente ningún afecto. La misión de Vidal es acabar con los últimos miembros de la resistencia republicana que permanecen escondidos en los montes de la zona. En la zona viven Mercedes (Maribel Verdú), el ama de llaves, y el médico (Álex Angulo) que se hace cargo del delicado estado de salud de Carmen. Una noche, Ofelia descubre las ruinas de un laberinto, y allí se encuentra con un fauno (Doug Jones), una extraña criatura que le hace una sorprendente revelación: ella es en realidad una princesa, la última de su estirpe, y los suyos la esperan desde hace mucho tiempo. Para poder regresar a su mágico reino, la niña deberá enfrentarse a tres pruebas.", 
+"año": 2006,
+"genero": "Fantástico/Bélico",
+"duracion": "1h 59m",
+"director": "Guillermo del Toro",
+"premios": "3 Oscars: Mejor fotografía, dirección artística, maquillaje. 6 Nominaciones<br>Globos de oro: Nominada a Mejor película de habla no inglesa (México)<br>3 Premios BAFTA: Mejor vestuario, maquillaje y película de habla no inglesa. 8",
+"voto_fa": "7,3/10",
+"voto_sensac": "4,5/5"
+}
+
+9
+00:01:57.560 --> 00:02:23.690
+{
+"titulo": "Children of Men", 
+"sinopsis": "Una sociedad futurista podría desaparecer cuando dejan de nacer más niños y la raza humana pierde la capacidad de procrear. Inglaterra vive un caos total. Para enfrentar la situación, un director con mano de hierro es nombrado para instaurar la ley marcial. Su habilidad para mantener el orden se ve amenazada cuando una mujer descubre que está embarazada con lo que pudiera ser el primer niño que nace en 27 años.", 
+"año": 2006,
+"genero": "Ciencia ficción/Suspenso",
+"duracion": "1h 54m",
+"director": "Alfonso Cuarón",
+"premios": "Oscar: La mejor fotografía<br>León de Oro<br>Oscar al mejor montaje",
+"voto_fa": "7,9/10",
+"voto_sensac": "4,1/5"
+}
+
+8
+00:02:24.200 --> 00:02:47.708
+{
+"titulo": "Zodiac", 
+"sinopsis": "Thriller sobre el famoso \"Asesino del Zodiaco\", un asesino en serie que, entre 1966 y 1978, mató a numerosas personas en San Francisco, al tiempo que enviaba a los medios de comunicación cartas con pistas. La acción se centra en las largas pesquisas de dos detectives que intentaron darle caza y en las investigaciones de dos periodistas que trataron de averiguar su identidad.", 
+"año": 2007,
+"genero": "Suspenso/Misterio",
+"duracion": "2h 42m",
+"director": "David Fincher",
+"premios": "Festival de Cannes: Nominada a la Palma de Oro (mejor película)<br>Asociación de Críticos de Chicago: 2 nominaciones incluyendo mejor director<br>Sindicato de Guionistas (WGA): Nominada a Mejor guión adaptado",
+"voto_fa": "6,8/10",
+"voto_sensac": "3,9/5"
+}
+
+7
+00:02:48.110 --> 00:03:11.027
+{
+"titulo": "Inside Lewis (\"A Propósito de Lewis\" o \"Bailada de un Hombre Común\")", 
+"sinopsis": "Nueva York, 1961. Llewyn Davis (Oscar Isaac) es un joven cantante de folk que vive de mala manera en el Greenwich Village. Durante un gélido invierno, con su guitarra a cuestas, sin casa fija y sin apenas dinero lucha por ganarse la vida como músico. Sobrevive cantando en pequeños garitos, pero, sobre todo, gracias a la ayuda de algunos amigos que le prestan su sofá para pasar las frías noches. De repente, decide viajar a Chicago para hacer una prueba para el magnate de la música Bud Grossman.", 
+"año": 2013,
+"genero": "Drama/Música",
+"duracion": "1h 50m",
+"director": "Ethan Jesse Coen, Joel David Coen",
+"premios": "Oscars: 2 nominaciones, mejor fotografía y mejor sonido<br>Globos de Oro: 3 nominaciones, mejor película, actor y canción<br>Festival de Cannes: Gran Premio del Jurado",
+"voto_fa": "6,7/10",
+"voto_sensac": "3,4/5"
+}
+
+6
+00:03:11.480 --> 00:03:43.995
+{
+"titulo": "A Separation (\"Nader y Simin, Una Separación\" o \"La Separación y una Separación\")", 
+"sinopsis": "Nader (Peyman Moaadi) y Simin (Leila Hatami) son un matrimonio iraní con una hija. Simin quiere abandonar Irán en busca de una vida mejor, pero Nader desea quedarse para cuidar a su padre, que tiene Alzheimer. Ella le pide el divorcio y se muda a vivir con sus padres. Nader no tiene más remedio que contratar a una mujer que cuide a su padre. Una negligencia de la asistenta provoca un conflicto de grandes dimensiones.", 
+"año": 2011,
+"genero": "Drama/Misterio",
+"duracion": "2h 3m",
+"director": "Asghar Farhadi",
+"premios": "Oscar: Mejor película de habla no inglesa. Nominada a Mejor guión original<br>Festival de Berlín: Oso de Oro a la Mejor película, Mejor actor, Mejor actriz<br>Globos de Oro: Mejor película de habla no inglesa",
+"voto_fa": "7,7/10",
+"voto_sensac": "3,7/5"
+}
+
+5
+00:03:44.360 --> 00:04:02.564
+{
+"titulo": "The Tree of Life (El Árbol de la Vida)", 
+"sinopsis": "Estados Unidos, años 50. Jack (Hunter McCracken) es un niño que vive con sus hermanos y sus padres. Mientras que su madre (Jessica Chastain) encarna el amor y la ternura, su padre (Brad Pitt) representa la severidad, pues la cree necesaria para enseñarle al niño a enfrentarse a un mundo hostil. Ese proceso de formación se extiende desde la niñez hasta la edad adulta. Es entonces cuando Jack (Sean Penn) evoca los momentos trascendentes de su infancia y trata de comprender qué influencia tuvieron sobre él y hasta qué punto determinaron su vida.", 
+"año": 2011,
+"genero": "Drama/Cine épico",
+"duracion": "3h 8m",
+"director": "Terrence Malick",
+"premios": "Oscars: Nominada a Mejor película, director y fotografía<br>Festival de Cannes: Palma de Oro - Mejor película<br>Premios Gotham: Mejor película (ex-aequo)",
+"voto_fa": "5,9/10",
+"voto_sensac": "2,7/5"
+}
+
+4
+00:04:03.000 --> 00:04:34.979
+{
+"titulo": "There Will Be Blood (\"Pozos de Ambición\" o \"Petróleo Sangriento\")", 
+"sinopsis": "Texas, principios del siglo XX. Una historia sobre la familia, la avaricia y la religión. Daniel Plainview (Daniel Day-Lewis) se traslada a una miserable ciudad con el propósito de hacer fortuna, pero, a medida que se va enriqueciendo, sus principios y valores desaparecen y acaba dominado por la ambición. Tras encontrar un rico yacimiento de petróleo en 1902, se convierte en un acaudalado magnate. Cuando, años después, intenta apoderarse de un nuevo yacimiento, tiene que enfrentarse al predicador Eli Sunday (Paul Dano). Adaptación de la novela de Upton Sinclair \"Petróleo\", escrita en 1927.", 
+"año": 2007,
+"genero": "Drama/Cine épico",
+"duracion": "2h 38m",
+"director": "Paul Thomas Anderson",
+"premios": "Premios César: Nominada a Mejor película extranjera<br>Festival de Berlín: Oso de Plata al Mejor director y contribución artística sob.<br>2 Oscars: mejor actor principal (Day-Lewis), fotografía. 8 nominaciones",
+"voto_fa": "7,2/10",
+"voto_sensac": "3,6/5"
+}
+
+3
+00:04:35.380 --> 00:05:02.880
+{
+"titulo": "Sen To Chihiro No Kamikakushi (El Viaje de Chihiro)", 
+"sinopsis": "Chihiro es una niña de diez años que viaja en coche con sus padres. Después de atravesar un túnel, llegan a un mundo fantástico, en el que no hay lugar para los seres humanos, sólo para los dioses de primera y segunda clase. Cuando descubre que sus padres han sido convertidos en cerdos, Chihiro se siente muy sola y asustada.", 
+"año": 2001,
+"genero": "Fantasía/Aventura",
+"duracion": "2h 5m",
+"director": "Hayao Miyazaki",
+"premios": "Oscar: Mejor largometraje de animación<br>Nominada Premios BAFTA: Mejor película de habla no inglesa<br>Festival de Berlín: Oso de Oro (ex aequo con \"Bloody Sunday\")",
+"voto_fa": "8,1/10",
+"voto_sensac": "4,3/5"
+}
+
+2
+00:05:03.240 --> 00:05:33.520
+{
+"titulo": "Boyhood (Boyhood: Momentos de una Vida)", 
+"sinopsis": "Historia dramática que recorre 12 años (2002-2013) de la vida de Mason (Ellar Coltrane) de los seis a los dieciocho. Durante este periodo, se producen todo tipo de cambios, mudanzas y controversias, relaciones que se tambalean, bodas, diferentes colegios, primeros amores, desilusiones y momentos maravillosos. Un viaje íntimo y basado en la euforia de la niñez, los sísmicos cambios de una familia moderna y el paso del tiempo.", 
+"año": 2014,
+"genero": "Drama/Cine épico",
+"duracion": "2h 46m",
+"director": "Richard Linklater",
+"premios": "Premios Oscar: mejor actriz secundaria (Patricia Arquette). 6 nominaciones<br>3 Globos de Oro: Mejor película - Drama, director y actriz sec. (Arquette)<br>Premios BAFTA: Mejor película, director y actriz secundaria (Arquette)",
+"voto_fa": "7,3/10",
+"voto_sensac": "2,3/5"
+}
+
+1
+00:05:33.958 --> 00:06:06.690
+{
+"titulo": "Mulholland Drive (\"El Camino de los Sueños\" o \"Sueños, Misterios y Secretos\")", 
+"sinopsis": "Betty Elms (Naomi Watts), una joven aspirante a actriz, llega a Los Ángeles para convertirse en estrella de cine y se aloja en el apartamento de su tía. Allí conoce a la enigmática Rita (Laura Harring), una mujer que padece amnesia a causa de un accidente sufrido en Mulholland Drive. Las dos juntas deciden investigar quién es Rita y cómo llegó hasta allí.", 
+"año": 2001,
+"genero": "Misterio/Suspenso",
+"duracion": "2h 27m",
+"director": "David Lynch",
+"premios": "Oscar: Nominada a Mejor dirección<br>Globos de Oro: 4 nominaciones: Mejor Película, director, guión y BSO<br>BAFTA: Mejor montaje. Nominada a Mejor música banda sonora",
+"voto_fa": "7,1/10",
+"voto_sensac": "2,9/5"
+}
+
+outro
+00:06:06.691 --> 00:06:29.049
+{
+"titulo": "GRACIAS", 
+"sinopsis": "Esperamos que lo hayas disfrutado <3", 
+"año": "POR",
+"genero": "VER",
+"duracion": "NUESTRO",
+"director": "VÍDEO",
+"premios": ":D",
+"voto_fa": "10/10",
+"voto_sensac": "5/5"
+}
