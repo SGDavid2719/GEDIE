@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
+// Set path to index page
 router.get("/", (req, res) => {
-	res.render("index.html", { title: "P1" });
+	res.render("index", { title: "Video" });
 });
 
-router.get("/secondpage", (req, res) => {
-	res.render("editor.html", { title: "P1" });
+// Set path to editor page
+router.get("/editorpage", (req, res) => {
+	res.render("editor", { title: "Editor" });
 });
 
 module.exports = router;

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%=title%></title>
+		<%- include('partials/head'); -%>
+		<link rel="stylesheet" href="/index.css" />
+	</head>
+	<%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
+	<body class="d-flex flex-column min-vh-100">
+		<div id="container">
+			<div class="row video">
+				<div class="col">
+					<div id="video-container">
+						<video id="video_with_controls" width="320" controls autobuffer>
+							<source src="" type='video/webm; codecs="vp8,vorbis"' />
+							<source src="" type="video/mp4" />
+							<source src="" type='video/ogg; codecs="theora, vorbis"' />
+							Your browser does not support the video tag
+						</video>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div id="video-info">
+						<h3>Soy la descripción</h3>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div id="other-videos">
+						<h3>Soy otro video</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<%- include('partials/footer'); -%>
+</html>
