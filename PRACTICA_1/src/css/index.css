@@ -2,37 +2,90 @@ body {
 	background-color: #202020;
 }
 
+#video-container {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+#video-content {
+	width: 100%;
+	height: 100%;
+}
+
+#video {
+	width: 100%;
+	height: 60vh;
+}
+
+/*
+#video-controls {
+	position: absolute;
+	bottom: 0;
+}
+*/
+
+/*
+#progress-bar-container {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	background-color: white;
+	opacity: 0.2;
+	margin: 0;
+}
+*/
+
+#video-controls {
+	width: 50vw;
+}
+
+#progress-bar-container {
+	width: 100%;
+	height: 3px;
+	background-color: white;
+	opacity: 0.2;
+	margin: 0;
+}
+
+#button-controls-container {
+	width: 100%;
+	margin: 0;
+}
+
+.btn {
+	color: white;
+}
+
+/*
 @media screen and (min-width: 320px) and (max-width: 480px) {
-	#video-container {
+	#video-content {
 		height: 25vh;
-		width: 100%;
 	}
 }
 
 @media screen and (min-width: 481px) and (max-width: 800px) {
-	#video-container {
+	#video-content {
 		height: 30vh;
-		width: 100%;
 	}
 }
 
 @media screen and (min-width: 801px) and (max-width: 1024px) {
-	#video-container {
+	#video-content {
 		height: 50vh;
-		width: 100%;
 	}
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1250px) {
-	#video-container {
+	#video-content {
 		height: 50vh;
-		width: 100%;
 	}
 }
 
 @media screen and (min-width: 1251px) {
-	#video-container {
+	#video-content {
 		height: 70vh;
-		width: 100%;
 	}
 }
+*/

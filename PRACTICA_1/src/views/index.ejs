@@ -7,26 +7,83 @@
 		<title><%=title%></title>
 		<%- include('partials/head'); -%>
 		<link rel="stylesheet" href="/index.css" />
-		<script src="/video.js"></script>
 	</head>
 	<%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
 	<body class="d-flex flex-column min-vh-100 text-white">
 		<div id="container" class="mx-4">
 			<div class="row mb-5">
-				<div class="col">
-					<div id="video-container" class="d-flex justify-content-center">
-						<video id="video_with_controls" controls autobuffer>
-							<source
-								src="/video/pelis.webm"
-								type='video/webm; codecs="vp8,vorbis"'
-							/>
-							<source src="/video/pelis.mp4" type="video/mp4" />
-							<source
-								src="/video/pelis.ogv"
-								type='video/ogg; codecs="theora, vorbis"'
-							/>
-							Your browser does not support the video tag
-						</video>
+				<!-- Good habits to keep controls for users that have JS turned off -->
+				<div id="video-container" controls>
+					<div class="row">
+						<div id="video-content">
+							<video id="video" poster="/images/videoPoster.jpg">
+								<source
+									src="/video/pelis.webm"
+									type='video/webm; codecs="vp8,vorbis"'
+								/>
+								<source src="/video/pelis.mp4" type="video/mp4" />
+								<source
+									src="/video/pelis.ogv"
+									type='video/ogg; codecs="theora, vorbis"'
+								/>
+								Your browser does not support the video tag
+							</video>
+						</div>
+					</div>
+					<div class="row d-flex justify-content-center">
+						<!-- Custom controls are defined here -->
+						<div id="video-controls">
+							<div id="progress-bar-container" class="row">
+								<div class="col"></div>
+							</div>
+							<div
+								id="button-controls-container"
+								class="row align-items-center"
+							>
+								<div
+									id="left-controls"
+									class="col-6 d-flex justify-content-left p-0"
+								>
+									<div class="col-4 d-flex justify-content-right">
+										<button class="btn">
+											<span title="Play (k)"
+												><i class="fa-solid fa-play"></i
+											></span>
+										</button>
+									</div>
+									<div class="col-4 d-flex justify-content-right">
+										<button class="btn">
+											<i class="fa-solid fa-volume-high"></i>
+											<i class="fa-solid fa-volume-low d-none"></i>
+											<i class="fa-solid fa-volume-xmark d-none"></i>
+										</button>
+									</div>
+									<div class="col-4 d-flex justify-content-right btn">
+										<p style="margin-bottom: 0">Time</p>
+									</div>
+								</div>
+								<div
+									id="right-controls"
+									class="col-6 d-flex justify-content-right p-0"
+								>
+									<div class="col-4 d-flex justify-content-left">
+										<button class="btn">
+											<i class="fa-solid fa-closed-captioning"></i>
+										</button>
+									</div>
+									<div class="col-4 d-flex justify-content-left">
+										<button class="btn">
+											<i class="fa-solid fa-gear"></i>
+										</button>
+									</div>
+									<div class="col-4 d-flex justify-content-left">
+										<button class="btn">
+											<i class="fa-solid fa-expand"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -47,6 +104,9 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Video js -->
+		<script src="/video.js"></script>
 	</body>
 	<%- include('partials/footer'); -%>
 </html>
