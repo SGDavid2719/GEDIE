@@ -14,7 +14,7 @@ body {
 }
 
 #video {
-	width: 100%;
+	width: auto;
 	height: 55vh;
 }
 
@@ -79,6 +79,11 @@ body {
 
 .btn {
 	color: white;
+	border: none;
+}
+
+.btn:hover {
+	color: rgb(209, 34, 34);
 }
 
 /*

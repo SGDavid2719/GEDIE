@@ -15,7 +15,7 @@
 				<!-- Good habits to keep controls for users that have JS turned off -->
 				<div id="video-container" controls>
 					<div class="row">
-						<div id="video-content">
+						<div id="video-content" class="d-flex justify-content-center">
 							<video id="video" poster="/images/videoPoster.jpg">
 								<source
 									src="/video/pelis.webm"
@@ -68,9 +68,11 @@
 									</div>
 									<div class="col-4 d-flex justify-content-left">
 										<button id="volume-btn" class="btn">
-											<i class="fa-solid fa-volume-high"></i>
-											<i class="fa-solid fa-volume-low d-none"></i>
-											<i class="fa-solid fa-volume-xmark d-none"></i>
+											<span title="Mute (m)" class="volume-icons">
+												<i class="fa-solid fa-volume-high"></i>
+												<i class="fa-solid fa-volume-low d-none"></i>
+												<i class="fa-solid fa-volume-xmark d-none"></i>
+											</span>
 										</button>
 										<input
 											class="volume"
@@ -105,8 +107,11 @@
 										</button>
 									</div>
 									<div class="col-4 d-flex justify-content-left">
-										<button class="btn">
-											<i class="fa-solid fa-expand"></i>
+										<button id="fullscreen-btn" class="btn">
+											<span title="Full screen (f)" class="screen-icons">
+												<i class="fa-solid fa-expand"></i>
+												<i class="fa-solid fa-compress d-none"></i>
+											</span>
 										</button>
 									</div>
 								</div>

@@ -20,6 +20,8 @@ lPlayButton.addEventListener("click", togglePlay);
 lVideo.addEventListener("play", updatePlayButton);
 lVideo.addEventListener("pause", updatePlayButton);
 
+lVideo.addEventListener("click", togglePlay);
+
 //////////////////////////////////////////////////////////
 //						Time elapsed					//
 //////////////////////////////////////////////////////////
@@ -41,13 +43,23 @@ lSeek.addEventListener("mousemove", updateSeekTooltip);
 lSeek.addEventListener("input", skipAhead);
 
 //////////////////////////////////////////////////////////
-//							Volume						//
+//						Volume							//
 //////////////////////////////////////////////////////////
 
 const lVolumeButton = document.getElementById("volume-btn");
 const lVolume = document.getElementById("volume");
 lVolume.addEventListener("input", updateVolume);
 lVideo.addEventListener("volumechange", updateVolumeIcon);
+lVolumeButton.addEventListener("click", toggleMute);
+
+//////////////////////////////////////////////////////////
+//						Full-Screen						//
+//////////////////////////////////////////////////////////
+
+const lFullscreenButton = document.getElementById("fullscreen-btn");
+const lVideoContainer = document.getElementById("video-container");
+lFullscreenButton.onclick = toggleFullScreen;
+lVideoContainer.addEventListener("fullscreenchange", updateFullscreenButton);
 
 /* -------------------- Functions -------------------- */
 
@@ -142,28 +154,81 @@ function updateVolume() {
 		lVideo.muted = false;
 	}
 
-	lVideo.volume = lVideo.value;
+	lVideo.volume = lVolume.value;
 }
 
 // updateVolumeIcon updates the volume icon so that it correctly reflects
 // the volume of the video
 function updateVolumeIcon() {
-	lVolumeButton.setAttribute("data-title", "Mute (m)");
+	document.querySelector("#volume-btn span").setAttribute("title", "Mute (m)");
 
 	if (lVideo.muted || lVideo.volume === 0) {
 		$(".fa-volume-high").addClass("d-none");
 		$(".fa-volume-low").addClass("d-none");
 		$(".fa-volume-xmark").removeClass("d-none");
-		volumeButton.setAttribute("data-title", "Unmute (m)");
+		document
+			.querySelector("#volume-btn span")
+			.setAttribute("title", "Unmute (m)");
 	} else if (lVideo.volume > 0 && lVideo.volume <= 0.5) {
-		volumeLow.classList.remove("hidden");
 		$(".fa-volume-high").addClass("d-none");
 		$(".fa-volume-low").removeClass("d-none");
 		$(".fa-volume-xmark").addClass("d-none");
 	} else {
-		volumeHigh.classList.remove("hidden");
 		$(".fa-volume-high").removeClass("d-none");
 		$(".fa-volume-low").addClass("d-none");
 		$(".fa-volume-xmark").addClass("d-none");
+	}
+}
+
+// toggleMute mutes or unmutes the video when executed
+// When the video is unmuted, the volume is returned to the value
+// it was set to before the video was muted
+function toggleMute() {
+	lVideo.muted = !lVideo.muted;
+
+	if (lVideo.muted) {
+		lVolume.setAttribute("data-volume", lVolume.value);
+		lVolume.value = 0;
+	} else {
+		lVolume.value = lVolume.dataset.volume;
+	}
+}
+
+//////////////////////////////////////////////////////////
+//						Full-Screen						//
+//////////////////////////////////////////////////////////
+
+// toggleFullScreen toggles the full screen state of the video
+// If the browser is currently in fullscreen mode,
+// then it should exit and vice versa.
+function toggleFullScreen() {
+	if (document.fullscreenElement) {
+		document.exitFullscreen();
+	} else if (document.webkitFullscreenElement) {
+		// Need this to support Safari
+		document.webkitExitFullscreen();
+	} else if (lVideoContainer.webkitRequestFullscreen) {
+		// Need this to support Safari
+		lVideoContainer.webkitRequestFullscreen();
+	} else {
+		lVideoContainer.requestFullscreen();
+	}
+}
+
+function updateFullscreenButton() {
+	console.log("1");
+	if (document.fullscreenElement) {
+		console.log("2");
+		document
+			.querySelector("#fullscreen-btn span")
+			.setAttribute("title", "Exit full screen (f)");
+		$(".fa-compress").removeClass("d-none");
+		$(".fa-expand").addClass("d-none");
+	} else {
+		document
+			.querySelector("#fullscreen-btn span")
+			.setAttribute("title", "Full screen (f)");
+		$(".fa-expand").removeClass("d-none");
+		$(".fa-compress").addClass("d-none");
 	}
 }
