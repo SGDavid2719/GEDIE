@@ -15,7 +15,7 @@ body {
 
 #video {
 	width: 100%;
-	height: 60vh;
+	height: 55vh;
 }
 
 /*
@@ -37,10 +37,32 @@ body {
 }
 */
 
+#seek {
+	cursor: pointer;
+}
+
+.seek:hover + .seek-tooltip {
+	display: block;
+}
+
+.seek-tooltip {
+	display: none;
+	position: absolute;
+	top: -50px;
+	margin-left: -20px;
+	font-size: 12px;
+	padding: 3px;
+	content: attr(data-title);
+	font-weight: bold;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
 #video-controls {
 	width: 50vw;
 }
 
+/*
 #progress-bar-container {
 	width: 100%;
 	height: 3px;
@@ -48,6 +70,7 @@ body {
 	opacity: 0.2;
 	margin: 0;
 }
+*/
 
 #button-controls-container {
 	width: 100%;
