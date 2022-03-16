@@ -15,3 +15,247 @@
 	</body>
 	<%- include('partials/footer'); -%>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%=title%></title>
+		<%- include('partials/head'); -%>
+		<link rel="stylesheet" href="/index.css" />
+	</head>
+	<%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
+	<body class="d-flex flex-column min-vh-100 text-white">
+		<div id="container" class="mx-4">
+			<div class="row mb-5">
+				<div class="col-lg-8 col-md-12">
+					<!-- Good habits to keep controls for users that have JS turned off -->
+					<div id="video-container" controls>
+						<div class="row">
+							<div id="video-content" class="d-flex justify-content-center">
+								<video id="video" poster="/images/videoPoster.jpg">
+									<source src="/video/Top_13.mp4" type="video/mp4" />
+									Your browser does not support the video tag
+								</video>
+							</div>
+						</div>
+						<div class="row d-flex justify-content-center">
+							<!-- Custom controls are defined here -->
+							<div id="video-controls">
+								<div id="progress-bar-container" class="row">
+									<progress
+										id="progress-bar"
+										value="0"
+										min="0"
+										class="d-none"
+									></progress>
+									<input
+										class="seek"
+										id="seek"
+										value="0"
+										min="0"
+										type="range"
+										step="1"
+									/>
+									<div class="seek-tooltip" id="seek-tooltip">00:00</div>
+								</div>
+								<div
+									id="button-controls-container"
+									class="row align-items-center"
+								>
+									<div
+										id="left-controls"
+										class="col-9 d-flex justify-content-left p-0"
+									>
+										<div class="col-2 d-flex justify-content-left">
+											<button id="play" class="btn">
+												<span title="Play (k)" class="play-pause-icons"
+													><i class="fa-solid fa-play"></i
+													><i class="fa-solid fa-pause d-none"></i>
+												</span>
+											</button>
+										</div>
+										<div class="col-4 d-flex justify-content-left">
+											<button id="volume-btn" class="btn">
+												<span title="Mute (m)" class="volume-icons">
+													<i class="fa-solid fa-volume-high"></i>
+													<i class="fa-solid fa-volume-low d-none"></i>
+													<i class="fa-solid fa-volume-xmark d-none"></i>
+												</span>
+											</button>
+											<input
+												class="volume"
+												id="volume"
+												value="1"
+												type="range"
+												max="1"
+												min="0"
+												step="0.01"
+											/>
+										</div>
+										<div class="col-1"></div>
+										<div class="col-4 d-flex justify-content-center btn">
+											<time id="time-elapsed">00:00</time>
+											<span> / </span>
+											<time id="duration">00:00</time>
+										</div>
+										<div class="col-1"></div>
+									</div>
+									<div
+										id="right-controls"
+										class="col-3 d-flex justify-content-right p-0"
+									>
+										<div class="col-4 d-flex justify-content-left">
+											<button class="btn">
+												<i class="fa-solid fa-closed-captioning"></i>
+											</button>
+										</div>
+										<div class="col-4 d-flex justify-content-left">
+											<button class="btn">
+												<i class="fa-solid fa-gear"></i>
+											</button>
+										</div>
+										<div class="col-4 d-flex justify-content-left">
+											<button id="fullscreen-btn" class="btn">
+												<span title="Full screen (f)" class="screen-icons">
+													<i class="fa-solid fa-expand"></i>
+													<i class="fa-solid fa-compress d-none"></i>
+												</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-12">
+					<div id="popup-container">
+						<form action="../php/add-tracks.php" id="track-form" method="post">
+							<div class="row">
+								<div class="col">
+									<label for="songs-title">Song Title:</label><br />
+									<input
+										type="text"
+										id="songs-title"
+										name="songs-title"
+										maxlength="20"
+										class="form-control"
+										required
+									/><br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="authors-name">Author's name:</label><br />
+									<input
+										type="text"
+										id="authors-name"
+										name="authors-name"
+										maxlength="20"
+										class="form-control"
+										required
+									/><br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="songs-genre">Genre:</label><br />
+									<input
+										type="text"
+										id="author-name"
+										name="author-name"
+										maxlength="20"
+										class="form-control"
+										required
+									/><br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="year">Year:</label><br />
+									<input
+										type="number"
+										id="year"
+										name="year"
+										min="1000"
+										max="9999"
+										class="form-control"
+										required
+									/><br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="start-time">Start Time:</label><br />
+									<input
+										type="time"
+										id="start-time"
+										name="start-time"
+										class="form-control"
+										step="1"
+										required
+									/><br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="end-time">End Time:</label><br />
+									<input
+										type="text"
+										id="end-time"
+										name="end-time"
+										maxlength="20"
+										class="form-control"
+										required
+									/><br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="video-url">Full Video:</label><br />
+									<input
+										type="text"
+										id="video-url"
+										name="video-url"
+										maxlength="20"
+										class="form-control"
+										required
+									/><br />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label for="lyrics">Lyrics:</label><br />
+									<input
+										type="text"
+										id="lyrics"
+										name="lyrics"
+										maxlength="20"
+										class="form-control"
+										required
+									/><br />
+								</div>
+							</div>
+							<div class="col d-flex justify-content-end">
+								<button
+									type="submit"
+									class="btn btn-primary"
+									name="submit-track-info"
+								>
+									<i class="fa-solid fa-plus"></i> Add Track
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+		</div>
+
+		<!-- Video js -->
+		<script src="/video.js"></script>
+	</body>
+	<%- include('partials/footer'); -%>
+</html>

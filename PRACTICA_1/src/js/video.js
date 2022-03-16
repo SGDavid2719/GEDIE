@@ -11,6 +11,16 @@ if (lVideoWorks) {
 	lVideoControls.classList.remove("hidden");
 }
 
+const lUrl = new URL(window.location.href);
+var lSong = "/video/";
+lSong =
+	lUrl.searchParams.get("song") == null
+		? lSong + "Top_20.mp4"
+		: lSong + lUrl.searchParams.get("song");
+
+loadVideo();
+loadImages();
+
 //////////////////////////////////////////////////////////
 //					Play-Pause Buttons					//
 //////////////////////////////////////////////////////////
@@ -60,6 +70,12 @@ const lFullscreenButton = document.getElementById("fullscreen-btn");
 const lVideoContainer = document.getElementById("video-container");
 lFullscreenButton.onclick = toggleFullScreen;
 lVideoContainer.addEventListener("fullscreenchange", updateFullscreenButton);
+
+//////////////////////////////////////////////////////////
+//					Keyboard shortcuts					//
+//////////////////////////////////////////////////////////
+
+document.addEventListener("keyup", keyboardShortcuts);
 
 /* -------------------- Functions -------------------- */
 
@@ -231,4 +247,71 @@ function updateFullscreenButton() {
 		$(".fa-expand").removeClass("d-none");
 		$(".fa-compress").addClass("d-none");
 	}
+}
+
+//////////////////////////////////////////////////////////
+//					Keyboard shortcuts					//
+//////////////////////////////////////////////////////////
+
+// keyboardShortcuts executes the relevant functions for
+// each supported shortcut key
+function keyboardShortcuts(event) {
+	const { key } = event;
+	switch (key) {
+		case "k":
+			togglePlay();
+			animatePlayback();
+			if (video.paused) {
+				showControls();
+			} else {
+				setTimeout(() => {
+					hideControls();
+				}, 2000);
+			}
+			break;
+		case "m":
+			toggleMute();
+			break;
+		case "f":
+			toggleFullScreen();
+			break;
+	}
+}
+
+//////////////////////////////////////////////////////////
+//						Load Video						//
+//////////////////////////////////////////////////////////
+
+function loadVideo() {
+	let lVideo_Element = document.getElementById("video");
+	let lSource = document.createElement("source");
+	if (lVideo_Element.canPlayType("video/mp4")) {
+		lSource.setAttribute("src", lSong);
+		lSource.setAttribute("type", "video/mp4");
+	}
+	lVideo_Element.appendChild(lSource);
+}
+
+function loadImages() {
+	console.log(lSong);
+	// Get div
+	let lOtherVideos_Element = document.getElementById("other-videos");
+	// Create a tag
+	let lLink_Element = document.createElement("a");
+	let lAll_URL = window.location.href;
+	let lReal_URL = lAll_URL.substr(0, lAll_URL.indexOf("/"));
+	let lRedirect_URL = lReal_URL + "/?song=";
+	lRedirect_URL =
+		lSong == "/video/Top_20.mp4"
+			? lRedirect_URL + "Top_13.mp4"
+			: lRedirect_URL + "Top_20.mp4";
+	lLink_Element.setAttribute("href", lRedirect_URL);
+	// Create an image
+	let lImage = document.createElement("img");
+	lImage.setAttribute("src", "/images/videoPoster.jpg");
+	lImage.setAttribute("alt", "ejemplo");
+	// Append img to a
+	lLink_Element.appendChild(lImage);
+	// Append link to div
+	lOtherVideos_Element.appendChild(lLink_Element);
 }

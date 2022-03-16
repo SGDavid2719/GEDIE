@@ -39,6 +39,7 @@ body {
 
 #seek {
 	cursor: pointer;
+	padding: 0;
 }
 
 .seek:hover + .seek-tooltip {
@@ -51,7 +52,6 @@ body {
 	top: -50px;
 	margin-left: -20px;
 	font-size: 12px;
-	padding: 3px;
 	content: attr(data-title);
 	font-weight: bold;
 	color: #fff;
@@ -82,9 +82,15 @@ body {
 	border: none;
 }
 
+img {
+	width: 50%;
+}
+
+/*
 .btn:hover {
 	color: rgb(209, 34, 34);
 }
+*/
 
 /*
 @media screen and (min-width: 320px) and (max-width: 480px) {
