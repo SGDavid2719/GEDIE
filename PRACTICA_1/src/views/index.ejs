@@ -16,7 +16,7 @@
 				<div id="video-container" controls>
 					<div class="row">
 						<div id="video-content" class="d-flex justify-content-center">
-							<video id="video" poster="/images/videoPoster.jpg">
+							<video id="video">
 								Your browser does not support the video tag
 							</video>
 						</div>
@@ -116,7 +116,31 @@
 					<div id="video-info">
 						<h5 id="videos-title">VIDEO'S TITLE</h5>
 						<hr />
-						<p id="videos-info">Info</p>
+						<div class="row">
+							<div class="col-3"><p>Song's Title:</p></div>
+							<div class="col-3"><p id="songs-title"></p></div>
+							<div class="col-6"></div>
+						</div>
+						<div class="row">
+							<div class="col-3"><p>Author:</p></div>
+							<div class="col-3"><p id="songs-author"></p></div>
+							<div class="col-6"></div>
+						</div>
+						<div class="row">
+							<div class="col-3"><p>Song's Genre:</p></div>
+							<div class="col-3"><p id="songs-genre"></p></div>
+							<div class="col-6"></div>
+						</div>
+						<div class="row">
+							<div class="col-3"><p>Year:</p></div>
+							<div class="col-3"><p id="songs-year"></p></div>
+							<div class="col-6"></div>
+						</div>
+						<div class="row">
+							<div class="col-3"><p>Song's Full Video Link:</p></div>
+							<div class="col-3"><p id="songs-fullvideo"></p></div>
+							<div class="col-6"></div>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-12">
@@ -129,7 +153,8 @@
 		</div>
 
 		<!-- Video js -->
-		<script src="/video.js"></script>
+		<script src="/videoControls.js"></script>
+		<script src="/index.js"></script>
 	</body>
 	<%- include('partials/footer'); -%>
 </html>

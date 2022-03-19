@@ -22,6 +22,7 @@ app.use(require("./routes"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "js")));
+app.use(express.static(path.join(__dirname, "php")));
 
 // listening the server
 app.listen(app.get("port"), () => {

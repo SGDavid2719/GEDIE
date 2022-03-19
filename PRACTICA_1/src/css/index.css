@@ -18,6 +18,10 @@ body {
 	height: 55vh;
 }
 
+.fullScreen {
+	height: 100vh !important;
+}
+
 /*
 #video-controls {
 	position: absolute;
