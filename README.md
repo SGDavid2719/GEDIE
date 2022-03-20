@@ -1,0 +1,3 @@
+# GEDIE
+
+npm i nodemon
