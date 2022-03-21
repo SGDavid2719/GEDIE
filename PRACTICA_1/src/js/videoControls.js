@@ -65,7 +65,9 @@ lVideoContainer.addEventListener("fullscreenchange", updateFullscreenButton);
 //					Keyboard shortcuts					//
 //////////////////////////////////////////////////////////
 
-document.addEventListener("keyup", keyboardShortcuts);
+const lEditorUrl = window.location.href;
+if (!lEditorUrl.includes("editorpage"))
+	document.addEventListener("keyup", keyboardShortcuts);
 
 /* -------------------- Functions -------------------- */
 

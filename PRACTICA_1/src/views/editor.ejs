@@ -17,7 +17,7 @@
 					<div id="video-container" controls>
 						<div class="row">
 							<div id="video-content" class="d-flex justify-content-center">
-								<video id="video" poster="/images/videoPoster.jpg">
+								<video id="video" poster="/images/Top13_Cover.png">
 									<source src="/video/Top_13.mp4" type="video/mp4" />
 									Your browser does not support the video tag
 								</video>
@@ -115,7 +115,7 @@
 				</div>
 				<div class="col-lg-3 col-md-12">
 					<div id="popup-container">
-						<form action="../php/add-tracks.php" id="track-form" method="post">
+						<form id="track-form">
 							<div class="row">
 								<div class="col">
 									<label for="songs-title">Song Title:</label><br />
@@ -173,11 +173,10 @@
 								<div class="col">
 									<label for="start-time">Start Time:</label><br />
 									<input
-										type="time"
+										type="text"
 										id="start-time"
 										name="start-time"
 										class="form-control"
-										step="1"
 										required
 									/><br />
 								</div>
@@ -238,7 +237,8 @@
 		</div>
 
 		<!-- Video js -->
-		<script src="/video.js"></script>
+		<script src="/videoControls.js"></script>
+		<script src="/editor.js"></script>
 	</body>
 	<%- include('partials/footer'); -%>
 </html>

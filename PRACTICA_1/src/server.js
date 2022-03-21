@@ -8,7 +8,7 @@ var favicon = require("serve-favicon");
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 // settings
-app.set("port", 3000);
+app.set("port", 8080);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
