@@ -1,4 +1,4 @@
-# GEDIE
+# NODE JS
 
 npm i nodemon
 
