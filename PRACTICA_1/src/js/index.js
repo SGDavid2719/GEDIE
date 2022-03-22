@@ -17,36 +17,54 @@ function loadVideo() {
 	let lVideo_Element = document.getElementById("video");
 	let lSource = document.createElement("source");
 	let lTrack = document.createElement("track");
-	if (lVideo_Element.canPlayType("video/mp4")) {
-		// Set video
-		lSource.setAttribute("src", lSong);
-		lSource.setAttribute("type", "video/mp4");
-		// Set cover
-		let lCover = "/images/";
-		lCover =
-			lSong == "/video/Top_20.mp4"
-				? lCover + "Top20_Cover.png"
-				: lCover + "Top13_Cover.png";
-		// Change poster
-		lVideo_Element.setAttribute("poster", lCover);
-		// Change title
-		document.getElementById("videos-title").innerHTML = lSong.includes("20")
-			? "Top 20 - Singles"
-			: "Top 13 - 90s Hits";
-		// Change video's track
-		let lSrcTrack = "/tracks/";
-		lSrcTrack =
-			lSong == "/video/Top_20.mp4"
-				? lCover + "Top20_Track.vtt"
-				: lCover + "Top13_Track.vtt";
-		lTrack.setAttribute("label", "Metadata");
-		lTrack.setAttribute("kind", "metadata");
-		lTrack.setAttribute("srclang", "en");
-		lTrack.setAttribute("src", "/tracks/Top20_Track.vtt");
-		lTrack.setAttribute("default", true);
+	let lSubtitle = document.createElement("track");
+
+	try {
+		if (lVideo_Element.canPlayType("video/mp4")) {
+			// Set video
+			lSource.setAttribute("src", lSong);
+			lSource.setAttribute("type", "video/mp4");
+			// Set cover
+			let lCover = "/images/";
+			lCover =
+				lSong == "/video/Top_20.mp4"
+					? lCover + "Top20_Cover.png"
+					: lCover + "Top13_Cover.png";
+			// Change poster
+			lVideo_Element.setAttribute("poster", lCover);
+			// Change title
+			document.getElementById("videos-title").innerHTML = lSong.includes("20")
+				? "Top 20 - Singles"
+				: "Top 13 - 90s Hits";
+			// Change video's track
+			let lSrcTrack = "/tracks/";
+			lSrcTrack =
+				lSong == "/video/Top_20.mp4"
+					? lSrcTrack + "Top20_Track.vtt"
+					: lSrcTrack + "Top13_Track.vtt";
+			lTrack.setAttribute("label", "Metadata");
+			lTrack.setAttribute("kind", "metadata");
+			lTrack.setAttribute("srclang", "en");
+			lTrack.setAttribute("src", lSrcTrack);
+			lTrack.setAttribute("default", true);
+			// Change video's subtitles
+			let lSrcSubtitle = "/tracks/";
+			lSrcSubtitle =
+				lSong == "/video/Top_20.mp4"
+					? lSrcSubtitle + "Top20_Subtitles.vtt"
+					: lSrcSubtitle + "Top13_Subtitles.vtt";
+			lSubtitle.setAttribute("label", "Substitles");
+			lSubtitle.setAttribute("kind", "subtitles");
+			lSubtitle.setAttribute("srclang", "en");
+			lSubtitle.setAttribute("src", lSrcSubtitle);
+			lSubtitle.setAttribute("default", false);
+		}
+		lVideo_Element.appendChild(lSource);
+		lVideo_Element.appendChild(lTrack);
+		lVideo_Element.appendChild(lSubtitle);
+	} catch (lError) { 
+		console.log(lError);
 	}
-	lVideo_Element.appendChild(lSource);
-	lVideo_Element.appendChild(lTrack);
 }
 
 //////////////////////////////////////////////////////////
