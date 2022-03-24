@@ -18,7 +18,6 @@ function loadVideo() {
 	let lSource = document.createElement("source");
 	let lTrack = document.createElement("track");
 	let lSubtitle = document.createElement("track");
-
 	try {
 		if (lVideo_Element.canPlayType("video/mp4")) {
 			// Set video
@@ -53,16 +52,22 @@ function loadVideo() {
 				lSong == "/video/Top_20.mp4"
 					? lSrcSubtitle + "Top20_Subtitles.vtt"
 					: lSrcSubtitle + "Top13_Subtitles.vtt";
-			lSubtitle.setAttribute("label", "Substitles");
+			lSubtitle.setAttribute("label", "English");
 			lSubtitle.setAttribute("kind", "subtitles");
 			lSubtitle.setAttribute("srclang", "en");
 			lSubtitle.setAttribute("src", lSrcSubtitle);
-			lSubtitle.setAttribute("default", false);
+			lSubtitle.setAttribute("mode", "hidden");
 		}
 		lVideo_Element.appendChild(lSource);
 		lVideo_Element.appendChild(lTrack);
 		lVideo_Element.appendChild(lSubtitle);
-	} catch (lError) { 
+		// Disable each captioning track
+		for (var lIndex = 0; lIndex < lVideo_Element.textTracks.length; lIndex++) {
+			if (lVideo_Element.textTracks[lIndex].kind === "subtitles") {
+				lVideo_Element.textTracks[lIndex].mode = "hidden";
+			}
+		}
+	} catch (lError) {
 		console.log(lError);
 	}
 }
@@ -137,7 +142,6 @@ function getCurrentCueData() {
 }
 
 function updateInfoSection(pData) {
-	console.log(pData);
 	document.getElementById("songs-title").innerHTML = pData.title;
 	document.getElementById("songs-author").innerHTML = pData.author;
 	document.getElementById("songs-genre").innerHTML = pData.genre;

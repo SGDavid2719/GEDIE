@@ -168,7 +168,6 @@ function updateVolume() {
 	if (lVideo.muted) {
 		lVideo.muted = false;
 	}
-
 	lVideo.volume = lVolume.value;
 }
 
@@ -220,17 +219,21 @@ function toggleFullScreen() {
 	if (document.fullscreenElement) {
 		document.exitFullscreen();
 		$("#video").removeClass("fullScreen");
+		$("#video-controls").removeClass("bottom-bar");
 	} else if (document.webkitFullscreenElement) {
 		// Need this to support Safari
 		document.webkitExitFullscreen();
 		$("#video").removeClass("fullScreen");
+		$("#video-controls").removeClass("bottom-bar");
 	} else if (lVideoContainer.webkitRequestFullscreen) {
 		// Need this to support Safari
 		lVideoContainer.webkitRequestFullscreen();
 		$("#video").addClass("fullScreen");
+		$("#video-controls").addClass("bottom-bar");
 	} else {
 		lVideoContainer.requestFullscreen();
 		$("#video").addClass("fullScreen");
+		$("#video-controls").addClass("bottom-bar");
 	}
 }
 
@@ -255,7 +258,25 @@ function updateFullscreenButton() {
 //////////////////////////////////////////////////////////
 
 function toggleCaptioning() {
+	console.log(lVideo);
 	console.log(lVideo.textTracks);
+
+	// Get all text tracks for the current player.
+	var lTracks = lVideo.textTracks;
+
+	for (var lIndex = 0; lIndex < lTracks.length; lIndex++) {
+		var lTrack = lTracks[lIndex];
+
+		// Find the English captions track and mark it as "showing".
+		if (lTrack.kind === "subtitles" && lTrack.language === "en") {
+			if (lTrack.mode == "showing") {
+				lTrack.mode = "hidden";
+			} else {
+				lTrack.mode = "showing";
+				document.getElementById("subtitles-label").innerHTML = lTrack;
+			}
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////
@@ -283,6 +304,14 @@ function keyboardShortcuts(event) {
 			break;
 		case "f":
 			toggleFullScreen();
+			break;
+		case "Escape":
+			if (document.fullscreenElement) {
+				toggleFullScreen();
+			}
+			break;
+		case "c":
+			toggleCaptioning();
 			break;
 	}
 }

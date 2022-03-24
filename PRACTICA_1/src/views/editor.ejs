@@ -8,10 +8,11 @@
 		<%- include('partials/head'); -%>
 		<link rel="stylesheet" href="/index.css" />
 	</head>
-	<%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
-	<body class="d-flex flex-column min-vh-100 text-white">
+	<body class="d-flex flex-column text-white">
 		<div id="container" class="mx-4">
-			<div class="row mb-5">
+			<%- include('partials/navigation'); -%> <%- include('partials/header');
+			-%>
+			<div class="row mb-5 min-vh-100">
 				<div class="col-lg-8 col-md-12">
 					<!-- Good habits to keep controls for users that have JS turned off -->
 					<div id="video-container" controls>
@@ -234,11 +235,10 @@
 				</div>
 				<div class="col-1"></div>
 			</div>
+			<%- include('partials/footer'); -%>
 		</div>
-
 		<!-- Video js -->
 		<script src="/videoControls.js"></script>
 		<script src="/editor.js"></script>
 	</body>
-	<%- include('partials/footer'); -%>
 </html>
