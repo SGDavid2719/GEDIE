@@ -37,10 +37,11 @@ body {
 }
 
 .seek-tooltip {
+	width: auto;
 	display: none;
 	position: absolute;
-	top: -50px;
-	margin-left: -20px;
+	bottom: 0px;
+	margin-left: 0px;
 	font-size: 12px;
 	content: attr(data-title);
 	font-weight: bold;
@@ -82,4 +83,9 @@ body {
 
 img {
 	width: 50%;
+}
+
+ul {
+	list-style-type: none;
+	font-size: 1.1vw;
 }

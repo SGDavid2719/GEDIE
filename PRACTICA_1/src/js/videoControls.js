@@ -5,22 +5,12 @@ const lVideoControls = document.getElementById("video-controls");
 
 // Gets if the video can be played by the user's browser
 const lVideoWorks = !!document.createElement("video").canPlayType;
-if (lVideoWorks) {
-	// Hides native controls
-	lVideo.controls = false;
-	lVideoControls.classList.remove("hidden");
-}
 
 //////////////////////////////////////////////////////////
 //					Play-Pause Buttons					//
 //////////////////////////////////////////////////////////
 
 const lPlayButton = document.getElementById("play");
-lPlayButton.addEventListener("click", togglePlay);
-lVideo.addEventListener("play", updatePlayButton);
-lVideo.addEventListener("pause", updatePlayButton);
-
-lVideo.addEventListener("click", togglePlay);
 
 //////////////////////////////////////////////////////////
 //						Time elapsed					//
@@ -28,8 +18,6 @@ lVideo.addEventListener("click", togglePlay);
 
 const lTimeElapsed = document.getElementById("time-elapsed");
 const lDuration = document.getElementById("duration");
-lVideo.addEventListener("loadedmetadata", initializeVideo);
-lVideo.addEventListener("timeupdate", updateTimeElapsed);
 
 //////////////////////////////////////////////////////////
 //						Progress bar					//
@@ -37,10 +25,7 @@ lVideo.addEventListener("timeupdate", updateTimeElapsed);
 
 const lProgressBar = document.getElementById("progress-bar");
 const lSeek = document.getElementById("seek");
-lVideo.addEventListener("timeupdate", updateProgress);
 const lSeekTooltip = document.getElementById("seek-tooltip");
-lSeek.addEventListener("mousemove", updateSeekTooltip);
-lSeek.addEventListener("input", skipAhead);
 
 //////////////////////////////////////////////////////////
 //						Volume							//
@@ -48,9 +33,6 @@ lSeek.addEventListener("input", skipAhead);
 
 const lVolumeButton = document.getElementById("volume-btn");
 const lVolume = document.getElementById("volume");
-lVolume.addEventListener("input", updateVolume);
-lVideo.addEventListener("volumechange", updateVolumeIcon);
-lVolumeButton.addEventListener("click", toggleMute);
 
 //////////////////////////////////////////////////////////
 //						Full-Screen						//
@@ -58,23 +40,79 @@ lVolumeButton.addEventListener("click", toggleMute);
 
 const lFullscreenButton = document.getElementById("fullscreen-btn");
 const lVideoContainer = document.getElementById("video-container");
-lFullscreenButton.onclick = toggleFullScreen;
-lVideoContainer.addEventListener("fullscreenchange", updateFullscreenButton);
 
 //////////////////////////////////////////////////////////
 //						Captions						//
 //////////////////////////////////////////////////////////
 
 const lCaptionsButton = document.getElementById("captioning-btn");
-lCaptionsButton.onclick = toggleCaptioning;
 
 //////////////////////////////////////////////////////////
 //					Keyboard shortcuts					//
 //////////////////////////////////////////////////////////
 
 const lEditorUrl = window.location.href;
-if (!lEditorUrl.includes("editorpage"))
-	document.addEventListener("keyup", keyboardShortcuts);
+
+$(() => {
+	if (lVideoWorks) {
+		// Hides native controls
+		lVideo.controls = false;
+		lVideoControls.classList.remove("hidden");
+	}
+
+	//////////////////////////////////////////////////////////
+	//					Play-Pause Buttons					//
+	/////////////////////////////////////////////////////////
+
+	lPlayButton.addEventListener("click", togglePlay);
+	lVideo.addEventListener("play", updatePlayButton);
+	lVideo.addEventListener("pause", updatePlayButton);
+
+	lVideo.addEventListener("click", togglePlay);
+
+	//////////////////////////////////////////////////////////
+	//						Time elapsed					//
+	//////////////////////////////////////////////////////////
+
+	lVideo.addEventListener("loadedmetadata", initializeVideo);
+	lVideo.addEventListener("timeupdate", updateTimeElapsed);
+
+	//////////////////////////////////////////////////////////
+	//						Progress bar					//
+	//////////////////////////////////////////////////////////
+
+	lVideo.addEventListener("timeupdate", updateProgress);
+	lSeek.addEventListener("mousemove", updateSeekTooltip);
+	lSeek.addEventListener("input", skipAhead);
+
+	//////////////////////////////////////////////////////////
+	//						Volume							//
+	//////////////////////////////////////////////////////////
+
+	lVolume.addEventListener("input", updateVolume);
+	lVideo.addEventListener("volumechange", updateVolumeIcon);
+	lVolumeButton.addEventListener("click", toggleMute);
+
+	//////////////////////////////////////////////////////////
+	//						Full-Screen						//
+	//////////////////////////////////////////////////////////
+
+	lFullscreenButton.onclick = toggleFullScreen;
+	lVideoContainer.addEventListener("fullscreenchange", updateFullscreenButton);
+
+	//////////////////////////////////////////////////////////
+	//						Captions						//
+	//////////////////////////////////////////////////////////
+
+	lCaptionsButton.onclick = toggleCaptioning;
+
+	//////////////////////////////////////////////////////////
+	//					Keyboard shortcuts					//
+	//////////////////////////////////////////////////////////
+
+	if (!lEditorUrl.includes("editorpage"))
+		document.addEventListener("keyup", keyboardShortcuts);
+});
 
 /* -------------------- Functions -------------------- */
 

@@ -5,9 +5,11 @@ lSong =
 		? lSong + "Top_20.mp4"
 		: lSong + lUrl.searchParams.get("song");
 
-loadVideo();
-loadImages();
-getCurrentCueData();
+$(() => {
+	loadVideo();
+	loadImages();
+	getCurrentCueData();
+});
 
 //////////////////////////////////////////////////////////
 //						Load Video						//
@@ -18,8 +20,10 @@ function loadVideo() {
 	let lSource = document.createElement("source");
 	let lTrack = document.createElement("track");
 	let lSubtitle = document.createElement("track");
+	let lVideo_Can_Be_Played;
 	try {
-		if (lVideo_Element.canPlayType("video/mp4")) {
+		lVideo_Can_Be_Played = lVideo_Element.canPlayType("video/mp4");
+		if (lVideo_Can_Be_Played) {
 			// Set video
 			lSource.setAttribute("src", lSong);
 			lSource.setAttribute("type", "video/mp4");
@@ -41,11 +45,16 @@ function loadVideo() {
 				lSong == "/video/Top_20.mp4"
 					? lSrcTrack + "Top20_Track.vtt"
 					: lSrcTrack + "Top13_Track.vtt";
+			lTrack.setAttribute("id", "default-track");
 			lTrack.setAttribute("label", "Metadata");
 			lTrack.setAttribute("kind", "metadata");
 			lTrack.setAttribute("srclang", "en");
 			lTrack.setAttribute("src", lSrcTrack);
 			lTrack.setAttribute("default", true);
+			// Set event listener
+			lTrack.addEventListener("load", function () {
+				loadIndex(lTrack.track);
+			});
 			// Change video's subtitles
 			let lSrcSubtitle = "/tracks/";
 			lSrcSubtitle =
@@ -70,6 +79,48 @@ function loadVideo() {
 	} catch (lError) {
 		console.log(lError);
 	}
+}
+
+//////////////////////////////////////////////////////////
+//						Load Index						//
+//////////////////////////////////////////////////////////
+
+function loadIndex(pTrack) {
+	let lCues = pTrack.cues;
+	let lVideoIndex = document.getElementById("video-index");
+	let lList = document.createElement("ul");
+	for (let lIndex = 0; lIndex < lCues.length; lIndex++) {
+		let lCue_Data = JSON.parse(lCues[lIndex].text);
+		let lItem = document.createElement("li");
+		lItem.setAttribute("class", "list-item");
+		let lLink = document.createElement("a");
+		lLink.setAttribute("href", "");
+		$(lLink).text("Top: " + lCues[lIndex].id + ". " + lCue_Data.title);
+		lItem.appendChild(lLink);
+		lList.appendChild(lItem);
+	}
+	lVideoIndex.appendChild(lList);
+	// Create event listener
+	$(".list-item").click(function (e) {
+		e.preventDefault();
+		setActiveCue($(this).html());
+	});
+}
+
+function setActiveCue(pActiveCue) {
+	pActiveCue = pActiveCue.slice(
+		pActiveCue.indexOf(":") + 2,
+		pActiveCue.indexOf(".")
+	);
+	pActiveCue = pActiveCue.replace('<a href="">', "");
+
+	let lTracks = document.querySelector("video").textTracks;
+
+	let lSelectedCue = lTracks[0].cues.getCueById(pActiveCue);
+	let lCueTime = lSelectedCue.startTime;
+
+	let lVideo = document.getElementById("video");
+	lVideo.currentTime = lCueTime;
 }
 
 //////////////////////////////////////////////////////////
@@ -135,13 +186,13 @@ function getCurrentCueData() {
 
 				// Pasamos el cue a un objeto de JS mediante la función parse
 				var obj = JSON.parse(cue.text);
-				updateInfoSection(obj);
+				UpdateInfoSection(obj);
 			};
 		}
 	}
 }
 
-function updateInfoSection(pData) {
+function UpdateInfoSection(pData) {
 	document.getElementById("songs-title").innerHTML = pData.title;
 	document.getElementById("songs-author").innerHTML = pData.author;
 	document.getElementById("songs-genre").innerHTML = pData.genre;

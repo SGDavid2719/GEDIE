@@ -116,14 +116,14 @@
 				</div>
 				<div class="col-lg-3 col-md-12">
 					<div id="popup-container">
-						<form id="track-form">
+						<form id="track-form" action="editor.js" method="POST">
 							<div class="row">
 								<div class="col">
 									<label for="songs-title">Song Title:</label><br />
 									<input
 										type="text"
-										id="songs-title"
-										name="songs-title"
+										id="songs_title"
+										name="songs_title"
 										maxlength="20"
 										class="form-control"
 										required
@@ -135,8 +135,8 @@
 									<label for="authors-name">Author's name:</label><br />
 									<input
 										type="text"
-										id="authors-name"
-										name="authors-name"
+										id="authors_name"
+										name="authors_name"
 										maxlength="20"
 										class="form-control"
 										required
@@ -148,8 +148,8 @@
 									<label for="songs-genre">Genre:</label><br />
 									<input
 										type="text"
-										id="author-name"
-										name="author-name"
+										id="genre"
+										name="genre"
 										maxlength="20"
 										class="form-control"
 										required
@@ -175,8 +175,8 @@
 									<label for="start-time">Start Time:</label><br />
 									<input
 										type="text"
-										id="start-time"
-										name="start-time"
+										id="start_time"
+										name="start_time"
 										class="form-control"
 										required
 									/><br />
@@ -187,8 +187,8 @@
 									<label for="end-time">End Time:</label><br />
 									<input
 										type="text"
-										id="end-time"
-										name="end-time"
+										id="end_time"
+										name="end_time"
 										maxlength="20"
 										class="form-control"
 										required
@@ -200,8 +200,8 @@
 									<label for="video-url">Full Video:</label><br />
 									<input
 										type="text"
-										id="video-url"
-										name="video-url"
+										id="video_url"
+										name="video_url"
 										maxlength="20"
 										class="form-control"
 										required
@@ -222,11 +222,7 @@
 								</div>
 							</div>
 							<div class="col d-flex justify-content-end">
-								<button
-									type="submit"
-									class="btn btn-primary"
-									name="submit-track-info"
-								>
+								<button id="submit-btn" type="submit" class="btn btn-primary">
 									<i class="fa-solid fa-plus"></i> Add Track
 								</button>
 							</div>
