@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title><%=title%></title>
+		<title>Editor</title>
 		<%- include('partials/head'); -%>
 		<link rel="stylesheet" href="/index.css" />
 	</head>
@@ -116,7 +116,20 @@
 				</div>
 				<div class="col-lg-3 col-md-12">
 					<div id="popup-container">
-						<form id="track-form" action="editor.js" method="POST">
+						<form id="track-form">
+							<div class="row">
+								<div class="col">
+									<label for="songs-number">Song number:</label><br />
+									<input
+										type="text"
+										id="songs_number"
+										name="songs_number"
+										maxlength="20"
+										class="form-control"
+										required
+									/><br />
+								</div>
+							</div>
 							<div class="row">
 								<div class="col">
 									<label for="songs-title">Song Title:</label><br />

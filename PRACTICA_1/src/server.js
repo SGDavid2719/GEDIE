@@ -33,14 +33,58 @@ app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "js")));
 app.use(express.static(path.join(__dirname, "php")));
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 // Handling request
-app.post("/request", (req, res) => {
-	res.json([
-		{
-			name_recieved: req.body.name,
-			designation_recieved: req.body.designation,
-		},
-	]);
+app.get("/editor", function (req, res) {
+	res.render("editor", { qs: req.query });
+});
+
+var os = require("os");
+
+app.post("/editor", urlencodedParser, function (req, res) {
+	let lJSON = JSON.stringify(req.body, null, 2);
+	let lArray = JSON.parse(lJSON);
+	let lNumber = os.EOL + lArray.songs_number + os.EOL;
+	let lInterval = lArray.start_time + " --> " + lArray.end_time + os.EOL;
+	delete lArray["songs_number"];
+	delete lArray["start_time"];
+	delete lArray["end_time"];
+	fs.appendFile("./src/public/tracks/Top13_Track.vtt", lNumber, function (err) {
+		if (err) {
+			throw err;
+		} else {
+			fs.appendFile(
+				"./src/public/tracks/Top13_Track.vtt",
+				lInterval,
+				function (err) {
+					if (err) {
+						throw err;
+					} else {
+						fs.appendFile(
+							"./src/public/tracks/Top13_Track.vtt",
+							JSON.stringify(lArray, null, 2),
+							function (err) {
+								if (err) {
+									throw err;
+								} else {
+									fs.appendFile(
+										"./src/public/tracks/Top13_Track.vtt",
+										os.EOL,
+										function (err) {
+											if (err) throw err;
+											console.log("Saved!");
+										}
+									);
+								}
+							}
+						);
+					}
+				}
+			);
+		}
+	});
+	res.render("editor", { qs: req.query });
 });
 
 // listening the server
