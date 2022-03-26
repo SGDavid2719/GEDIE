@@ -1,4 +1,14 @@
-// Insert
-app.post("/add", function (req, res) {
-	console.log(req);
+$(document).ready(function () {
+	$("#submit-btn").click(function () {
+		$.post(
+			"/request",
+			{
+				name: "viSion",
+				designation: "Professional gamer",
+			},
+			function (data, status) {
+				console.log(data);
+			}
+		);
+	});
 });
