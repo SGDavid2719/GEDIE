@@ -10,103 +10,136 @@
 	</head>
 	<body class="d-flex flex-column text-white">
 		<div id="container" class="mx-4">
-			<%- include('partials/navigation'); -%> <%- include('partials/header');
-			-%>
-			<div class="row mb-5 min-vh-100">
+			<%- include('partials/navigation'); -%>
+			<header class="mb-2 mt-2">
+				<hgroup class="d-flex justify-content-center">
+					<h1>VIDEO EDITOR</h1>
+				</hgroup>
+			</header>
+			<div id="editor-container" class="row mb-5">
 				<div class="col-lg-8 col-md-12">
 					<!-- Good habits to keep controls for users that have JS turned off -->
 					<div id="video-container" controls>
-						<div class="row">
-							<div id="video-content" class="d-flex justify-content-center">
-								<video id="video" poster="/images/Top13_Cover.png">
-									<source src="/video/Top_13.mp4" type="video/mp4" />
-									Your browser does not support the video tag
-								</video>
-							</div>
-						</div>
-						<div class="row d-flex justify-content-center">
-							<!-- Custom controls are defined here -->
-							<div id="video-controls">
-								<div id="progress-bar-container" class="row">
-									<progress
-										id="progress-bar"
-										value="0"
-										min="0"
-										class="d-none"
-									></progress>
-									<input
-										class="seek"
-										id="seek"
-										value="0"
-										min="0"
-										type="range"
-										step="1"
-									/>
-									<div class="seek-tooltip" id="seek-tooltip">00:00</div>
+						<div class="row mx-2">
+							<div class="col">
+								<div id="video-content" class="">
+									<video id="video">
+										Your browser does not support the video tag
+									</video>
 								</div>
-								<div
-									id="button-controls-container"
-									class="row align-items-center"
-								>
-									<div
-										id="left-controls"
-										class="col-9 d-flex justify-content-left p-0"
-									>
-										<div class="col-2 d-flex justify-content-left">
-											<button id="play" class="btn">
-												<span title="Play (k)" class="play-pause-icons"
-													><i class="fa-solid fa-play"></i
-													><i class="fa-solid fa-pause d-none"></i>
-												</span>
-											</button>
-										</div>
-										<div class="col-4 d-flex justify-content-left">
-											<button id="volume-btn" class="btn">
-												<span title="Mute (m)" class="volume-icons">
-													<i class="fa-solid fa-volume-high"></i>
-													<i class="fa-solid fa-volume-low d-none"></i>
-													<i class="fa-solid fa-volume-xmark d-none"></i>
-												</span>
-											</button>
-											<input
-												class="volume"
-												id="volume"
-												value="1"
-												type="range"
-												max="1"
-												min="0"
-												step="0.01"
-											/>
-										</div>
-										<div class="col-1"></div>
-										<div class="col-4 d-flex justify-content-center btn">
-											<time id="time-elapsed">00:00</time>
-											<span> / </span>
-											<time id="duration">00:00</time>
-										</div>
-										<div class="col-1"></div>
+								<!-- Custom controls are defined here -->
+								<div id="video-controls">
+									<div id="progress-bar-container" class="row">
+										<progress
+											id="progress-bar"
+											value="0"
+											min="0"
+											class="d-none"
+										></progress>
+										<input
+											class="seek"
+											id="seek"
+											value="0"
+											min="0"
+											type="range"
+											step="1"
+										/>
+										<div class="seek-tooltip" id="seek-tooltip">00:00</div>
 									</div>
 									<div
-										id="right-controls"
-										class="col-3 d-flex justify-content-right p-0"
+										id="button-controls-container"
+										class="row d-flex justify-content-center px-4"
 									>
-										<div class="col-4 d-flex justify-content-left">
-											<button class="btn">
-												<i class="fa-solid fa-closed-captioning"></i>
-											</button>
+										<div
+											id="left-controls"
+											class="col-9 d-flex justify-content-left p-0"
+										>
+											<div class="col-2 d-flex justify-content-left">
+												<button id="play" class="btn">
+													<span title="Play (k)" class="play-pause-icons"
+														><i class="fa-solid fa-play"></i
+														><i class="fa-solid fa-pause d-none"></i>
+													</span>
+												</button>
+											</div>
+											<div
+												id="volume-section"
+												class="col-4 d-flex justify-content-left"
+											>
+												<button id="volume-btn" class="btn">
+													<span title="Mute (m)" class="volume-icons">
+														<i class="fa-solid fa-volume-high"></i>
+														<i class="fa-solid fa-volume-low d-none"></i>
+														<i class="fa-solid fa-volume-xmark d-none"></i>
+													</span>
+												</button>
+												<input
+													class="volume"
+													id="volume"
+													value="1"
+													type="range"
+													max="1"
+													min="0"
+													step="0.01"
+												/>
+											</div>
+											<div class="col-1"></div>
+											<div class="col-4 d-flex justify-content-center btn">
+												<time id="time-elapsed">00:00</time>
+												<span> / </span>
+												<time id="duration">00:00</time>
+											</div>
+											<div class="col-1"></div>
 										</div>
-										<div class="col-4 d-flex justify-content-left">
-											<button class="btn">
-												<i class="fa-solid fa-gear"></i>
-											</button>
-										</div>
-										<div class="col-4 d-flex justify-content-left">
-											<button id="fullscreen-btn" class="btn">
-												<span title="Full screen (f)" class="screen-icons">
-													<i class="fa-solid fa-expand"></i>
-													<i class="fa-solid fa-compress d-none"></i>
-												</span>
-											</button>
+										<div
+											id="right-controls"
+											class="col-3 d-flex justify-content-right p-0"
+										>
+											<div class="col-3 d-flex justify-content-left">
+												<button id="captioning-btn" class="btn">
+													<span title="Subtitles (c)">
+														<i class="fa-solid fa-closed-captioning"></i>
+													</span>
+												</button>
+											</div>
+											<div class="col-3 d-flex justify-content-left m-2">
+												<div class="btn-group dropup">
+													<button
+														type="button"
+														class="btn dropdown-toggle"
+														data-toggle="dropdown"
+														aria-haspopup="true"
+														aria-expanded="false"
+													>
+														<span title="Song List">
+															<i class="fa-solid fa-list"></i>
+														</span>
+													</button>
+													<div
+														id="song-list-btn"
+														class="dropdown-menu overflow-auto"
+													>
+														<a class="dropdown-item" href="#">Action</a>
+														<a class="dropdown-item" href="#">Another action</a>
+														<a class="dropdown-item" href="#"
+															>Something else here</a
+														>
+													</div>
+												</div>
+											</div>
+											<div class="col-3 d-flex justify-content-left">
+												<button class="btn">
+													<i class="fa-solid fa-gear"></i>
+												</button>
+											</div>
+											<div class="col-3 d-flex justify-content-left">
+												<button id="fullscreen-btn" class="btn">
+													<span title="Full screen (f)" class="screen-icons">
+														<i class="fa-solid fa-expand"></i>
+														<i class="fa-solid fa-compress d-none"></i>
+													</span>
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -115,7 +148,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-12">
-					<div id="popup-container">
+					<div id="form-container">
 						<form id="track-form">
 							<div class="row">
 								<div class="col">
@@ -135,8 +168,8 @@
 									<label for="songs-title">Song Title:</label><br />
 									<input
 										type="text"
-										id="songs_title"
-										name="songs_title"
+										id="title"
+										name="title"
 										maxlength="20"
 										class="form-control"
 										required
@@ -148,8 +181,8 @@
 									<label for="authors-name">Author's name:</label><br />
 									<input
 										type="text"
-										id="authors_name"
-										name="authors_name"
+										id="author"
+										name="author"
 										maxlength="20"
 										class="form-control"
 										required
@@ -213,8 +246,8 @@
 									<label for="video-url">Full Video:</label><br />
 									<input
 										type="text"
-										id="video_url"
-										name="video_url"
+										id="fullVideo"
+										name="fullVideo"
 										maxlength="20"
 										class="form-control"
 										required
@@ -234,10 +267,31 @@
 									/><br />
 								</div>
 							</div>
-							<div class="col d-flex justify-content-end">
-								<button id="submit-btn" class="btn btn-primary">
-									<i class="fa-solid fa-plus"></i> Add Track
-								</button>
+							<div class="row">
+								<div
+									id="delete-btn-container"
+									class="col-6 d-flex flex-row d-none"
+								>
+									<button id="delete-btn" class="btn btn-danger">
+										<i class="fa-solid fa-plus"></i> Delete Cue
+									</button>
+								</div>
+								<div
+									id="edit-btn-container"
+									class="col-6 d-flex flex-row-reverse d-none"
+								>
+									<button id="edit-btn" class="btn btn-primary">
+										<i class="fa-solid fa-plus"></i> Edit Cue
+									</button>
+								</div>
+								<div
+									id="add-btn-container"
+									class="col-12 d-flex flex-row-reverse"
+								>
+									<button id="add-btn" class="btn btn-primary">
+										<i class="fa-solid fa-plus"></i> Add Cue
+									</button>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -247,6 +301,7 @@
 			<%- include('partials/footer'); -%>
 		</div>
 		<!-- Video js -->
+		<script src="/video.js"></script>
 		<script src="/videoControls.js"></script>
 		<script src="/editor.js"></script>
 	</body>

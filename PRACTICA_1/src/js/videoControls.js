@@ -51,8 +51,6 @@ const lCaptionsButton = document.getElementById("captioning-btn");
 //					Keyboard shortcuts					//
 //////////////////////////////////////////////////////////
 
-const lEditorUrl = window.location.href;
-
 $(() => {
 	if (lVideoWorks) {
 		// Hides native controls
@@ -311,7 +309,6 @@ function toggleCaptioning() {
 				lTrack.mode = "hidden";
 			} else {
 				lTrack.mode = "showing";
-				document.getElementById("subtitles-label").innerHTML = lTrack;
 			}
 		}
 	}
