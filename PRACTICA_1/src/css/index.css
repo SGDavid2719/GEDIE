@@ -32,7 +32,7 @@ body {
 	padding: 0;
 }
 
-.seek:hover + .seek-tooltip {
+.seek:hover+.seek-tooltip {
 	display: block;
 }
 
@@ -88,4 +88,9 @@ img {
 ul {
 	list-style-type: none;
 	font-size: 1.1vw;
+}
+
+#song-list-btn {
+	max-height: 280px;
+	overflow-y: auto;
 }

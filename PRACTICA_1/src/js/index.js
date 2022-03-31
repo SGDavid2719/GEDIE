@@ -87,21 +87,15 @@ function loadVideo() {
 
 function loadIndex(pTrack) {
 	let lCues = pTrack.cues;
-	let lVideoIndex = document.getElementById("video-index");
-	let lList = document.createElement("ul");
+	let lVideoIndex = document.getElementById("song-list-btn");
+	let ret = '';
 	for (let lIndex = 0; lIndex < lCues.length; lIndex++) {
 		let lCue_Data = JSON.parse(lCues[lIndex].text);
-		let lItem = document.createElement("li");
-		lItem.setAttribute("class", "list-item");
-		let lLink = document.createElement("a");
-		lLink.setAttribute("href", "");
-		$(lLink).text("Top: " + lCues[lIndex].id + ". " + lCue_Data.title);
-		lItem.appendChild(lLink);
-		lList.appendChild(lItem);
+		ret += '<a class="dropdown-item" href="#">' + "Top: " + lCues[lIndex].id + ". " + lCue_Data.title + '</a>'
 	}
-	lVideoIndex.appendChild(lList);
-	// Create event listener
-	$(".list-item").click(function (e) {
+	lVideoIndex.innerHTML = ret;
+
+	$(".dropdown-item").click(function (e) {
 		e.preventDefault();
 		setActiveCue($(this).html());
 	});
