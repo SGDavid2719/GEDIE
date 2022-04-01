@@ -7,7 +7,7 @@ lSong =
 
 const lEditorUrl = window.location.href;
 
-//lSong = lEditorUrl.includes("editorpage") ? "/video/Top_13.mp4" : lSong;
+lSong = lEditorUrl.includes("editorpage") ? "/video/Top_13.mp4" : lSong;
 
 $(() => {
 	try {
@@ -157,6 +157,7 @@ function getCurrentCueData() {
 
 				// Control de errores
 				if (lCue == null) {
+					if (lEditorUrl.includes("editorpage")) UpdateFormFields(undefined);
 					console.log("Cue null!");
 					return;
 				}

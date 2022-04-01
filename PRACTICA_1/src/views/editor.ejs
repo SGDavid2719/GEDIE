@@ -170,7 +170,7 @@
 										type="text"
 										id="title"
 										name="title"
-										maxlength="20"
+										maxlength="35"
 										class="form-control"
 										required
 									/><br />
@@ -220,10 +220,11 @@
 								<div class="col">
 									<label for="start-time">Start Time:</label><br />
 									<input
-										type="text"
+										type="number"
 										id="start_time"
 										name="start_time"
 										class="form-control"
+										min="0"
 										required
 									/><br />
 								</div>
@@ -232,10 +233,10 @@
 								<div class="col">
 									<label for="end-time">End Time:</label><br />
 									<input
-										type="text"
+										type="number"
 										id="end_time"
 										name="end_time"
-										maxlength="20"
+										min="0"
 										class="form-control"
 										required
 									/><br />

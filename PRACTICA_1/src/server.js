@@ -45,11 +45,30 @@ var os = require("os");
 app.post("/editor", urlencodedParser, function (req, res) {
 	let lJSON = JSON.stringify(req.body, null, 2);
 	let lArray = JSON.parse(lJSON);
+
 	let lNumber = os.EOL + lArray.songs_number + os.EOL;
-	let lInterval = lArray.start_time + " --> " + lArray.end_time + os.EOL;
+	let lInterval =
+		lArray.start_time.toHHMMSS() +
+		" --> " +
+		lArray.end_time.toHHMMSS() +
+		os.EOL;
 	delete lArray["songs_number"];
 	delete lArray["start_time"];
 	delete lArray["end_time"];
+
+	if (fs.readFileSync("./src/public/tracks/Top13_Track.vtt").length === 0) {
+		fs.appendFile(
+			"./src/public/tracks/Top13_Track.vtt",
+			"WEBVTT" + os.EOL,
+			function (err) {
+				if (err) {
+					throw err;
+				} else {
+					console.log("File init succesfully");
+				}
+			}
+		);
+	}
 	fs.appendFile("./src/public/tracks/Top13_Track.vtt", lNumber, function (err) {
 		if (err) {
 			throw err;
@@ -190,6 +209,24 @@ app.post("/testdelete", urlencodedParser, function (req, res) {
 		}
 	});
 });
+
+String.prototype.toHHMMSS = function () {
+	var sec_num = parseInt(this, 10); // don't forget the second param
+	var hours = Math.floor(sec_num / 3600);
+	var minutes = Math.floor((sec_num - hours * 3600) / 60);
+	var seconds = sec_num - hours * 3600 - minutes * 60;
+
+	if (hours < 10) {
+		hours = "0" + hours;
+	}
+	if (minutes < 10) {
+		minutes = "0" + minutes;
+	}
+	if (seconds < 10) {
+		seconds = "0" + seconds;
+	}
+	return hours + ":" + minutes + ":" + seconds + ".000";
+};
 
 // listening the server
 app.listen(app.get("port"), () => {
