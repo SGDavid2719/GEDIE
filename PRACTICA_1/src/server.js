@@ -5,6 +5,7 @@ const path = require("path");
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const Swal = require("sweetalert2");
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,7 +43,7 @@ app.get("/editor", function (req, res) {
 
 var os = require("os");
 
-app.post("/editor", urlencodedParser, function (req, res) {
+app.post("/add", urlencodedParser, function (req, res) {
 	let lJSON = JSON.stringify(req.body, null, 2);
 	let lArray = JSON.parse(lJSON);
 
@@ -108,7 +109,7 @@ app.post("/editor", urlencodedParser, function (req, res) {
 
 const lineReader = require("line-reader");
 
-app.post("/test", urlencodedParser, function (req, res) {
+app.post("/edit", urlencodedParser, function (req, res) {
 	let lJSON = JSON.stringify(req.body, null, 2);
 
 	console.log(lJSON);
@@ -145,13 +146,12 @@ app.post("/test", urlencodedParser, function (req, res) {
 			console.log(line);
 			lEdit = false;
 		}
-		// fs.appendFile(
-		// 	"./src/public/tracks/Top13_Track_copy.vtt",
-		// 	line,
-		// 	function () {
-		// 		//console.log(line);
-		// 	}
-		// );
+		try {
+			let lNewLine = line + os.EOL;
+			fs.appendFileSync("./src/public/tracks/Top13_Track_copy.vtt", lNewLine);
+		} catch (err) {
+			console.log("Error writing: " + err.message);
+		}
 	});
 
 	// fs.readFile(
@@ -182,10 +182,10 @@ app.post("/test", urlencodedParser, function (req, res) {
 	// 		console.log("Test Saved!");
 	// 	}
 	// });
-	//res.render("test", { qs: req.query });
+	res.render("editor", { qs: req.query });
 });
 
-app.post("/testdelete", urlencodedParser, function (req, res) {
+app.post("/delete", urlencodedParser, function (req, res) {
 	let lJSON = JSON.stringify(req.body, null, 2);
 
 	console.log(lJSON);
@@ -208,6 +208,65 @@ app.post("/testdelete", urlencodedParser, function (req, res) {
 			lDelete = false;
 		}
 	});
+
+	res.render("editor", { qs: req.query });
+});
+
+app.post("/copy", urlencodedParser, function (req, res) {
+	let lFirstLine = true;
+	let lNewLine;
+	lineReader.eachLine(
+		"./src/public/tracks/Top13_Track_copy.vtt",
+		function (line) {
+			console.log("?: " + line);
+			if (lFirstLine) {
+				try {
+					fs.writeFileSync("./src/public/tracks/Top13_Track.vtt", "", (err) => {
+						if (err) {
+							console.error(err);
+							return;
+						}
+					});
+					lFirstLine = false;
+					console.log("1.");
+					lNewLine = line + os.EOL;
+					fs.appendFileSync(
+						"./src/public/tracks/Top13_Track.vtt",
+						lNewLine,
+						(err) => {
+							if (err) {
+								console.error(err);
+								return;
+							}
+							//file written successfully
+						}
+					);
+				} catch (err) {
+					console.log("Error writing: " + err.message);
+				}
+			} else {
+				try {
+					lNewLine = line + os.EOL;
+					fs.appendFileSync(
+						"./src/public/tracks/Top13_Track.vtt",
+						lNewLine,
+						(err) => {
+							if (err) {
+								console.error(err);
+								return;
+							}
+							//file written successfully
+						}
+					);
+					console.log("2.");
+				} catch (err) {
+					console.log("Error writing: " + err.message);
+				}
+			}
+		}
+	);
+
+	res.render("editor", { qs: req.query });
 });
 
 String.prototype.toHHMMSS = function () {

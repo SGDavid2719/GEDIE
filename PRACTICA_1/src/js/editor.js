@@ -1,33 +1,49 @@
 $(document).ready(function () {
-	///// Prevent window reload
-	$("#track-form").submit(function (e) {
-		e.preventDefault();
-		document.getElementById("track-form").reset();
-		document.getElementById("default-track").src = "./tracks/Top13_Track.vtt";
-	});
 	///// Add button
 	$("#add-btn").click(function () {
-		$.post(
-			"/editor",
-			$("#track-form").serializeArray(),
-			function (data, status) {
-				console.log(data);
-			}
+		console.log($("#track-form").serializeArray());
+		let lFormData = $("#track-form").serializeArray();
+		let lValidInterval = CheckStartEndInterval(
+			lFormData[5].value,
+			lFormData[6].value
 		);
+		if (lValidInterval) {
+			$.post(
+				"/add",
+				$("#track-form").serializeArray(),
+				function (data, status) {
+					console.log(data);
+				}
+			);
+		} else {
+			///// Prevent window reload
+			$("#track-form").submit(function (e) {
+				e.preventDefault();
+			});
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Wrong time interval",
+				footer: "",
+			});
+		}
 	});
 	///// Edit button
 	$("#edit-btn").click(function () {
-		$.post("/test", $("#track-form").serializeArray(), function (data, status) {
+		$.post("/edit", $("#track-form").serializeArray(), function (data, status) {
 			console.log(data);
 		});
 	});
 	///// Delete button
 	$("#delete-btn").click(function () {
 		$.post(
-			"/testdelete",
+			"/delete",
 			$("#track-form").serializeArray(),
 			function (data, status) {
 				console.log(data);
+				$.post("/copy", "", function (data, status) {
+					console.log(data);
+				});
 			}
 		);
 	});
@@ -35,7 +51,6 @@ $(document).ready(function () {
 
 function UpdateFormFields(pCue) {
 	if (pCue != undefined) {
-		console.log(pCue);
 		let lData = JSON.parse(pCue.text);
 		document.getElementById("songs_number").value = pCue.id;
 		document.getElementById("title").value = lData.title;
@@ -59,4 +74,9 @@ function UpdateFormFields(pCue) {
 		$("#edit-btn-container").removeClass("d-none");
 		$("#delete-btn-container").removeClass("d-none");
 	}
+}
+
+function CheckStartEndInterval(pStartTime, pEndTime) {
+	console.log(pStartTime, pEndTime);
+	return parseInt(pStartTime) < parseInt(pEndTime);
 }

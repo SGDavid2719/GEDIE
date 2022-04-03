@@ -126,10 +126,13 @@ function setActiveCue(pActiveCue) {
 	let lTracks = document.querySelector("video").textTracks;
 
 	let lSelectedCue = lTracks[0].cues.getCueById(pActiveCue);
-	let lCueTime = lSelectedCue.startTime;
+	let lCueTime;
 
-	let lVideo = document.getElementById("video");
-	lVideo.currentTime = lCueTime;
+	if (lSelectedCue != null) {
+		lCueTime = lSelectedCue.startTime;
+		let lVideo = document.getElementById("video");
+		lVideo.currentTime = lCueTime;
+	}
 }
 
 //////////////////////////////////////////////////////////
