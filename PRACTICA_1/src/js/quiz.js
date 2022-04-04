@@ -11,7 +11,6 @@ $(() => {
 });
 
 var lQuizPuntuation = 0;
-var lPlay = false;
 
 var lQuiz = [
 	{

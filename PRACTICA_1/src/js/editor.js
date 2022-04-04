@@ -1,8 +1,8 @@
 $(document).ready(function () {
 	///// Add button
 	$("#add-btn").click(function () {
-		console.log($("#track-form").serializeArray());
 		let lFormData = $("#track-form").serializeArray();
+
 		let lValidInterval = CheckStartEndInterval(
 			lFormData[5].value,
 			lFormData[6].value
@@ -15,6 +15,9 @@ $(document).ready(function () {
 					console.log(data);
 				}
 			);
+			$("#track-form").submit(function (e) {
+				window.location.reload();
+			});
 		} else {
 			///// Prevent window reload
 			$("#track-form").submit(function (e) {
@@ -41,9 +44,6 @@ $(document).ready(function () {
 			$("#track-form").serializeArray(),
 			function (data, status) {
 				console.log(data);
-				$.post("/copy", "", function (data, status) {
-					console.log(data);
-				});
 			}
 		);
 	});
