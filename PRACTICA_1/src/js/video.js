@@ -99,14 +99,16 @@ function loadIndex(pTrack) {
 	let lVideoIndex = document.getElementById("song-list-btn");
 	let lList = "";
 	for (let lIndex = 0; lIndex < lCues.length; lIndex++) {
-		let lCue_Data = JSON.parse(lCues[lIndex].text);
-		lList +=
-			'<a class="dropdown-item" href="#">' +
-			"Top: " +
-			lCues[lIndex].id +
-			". " +
-			lCue_Data.title +
-			"</a>";
+		if (lCues[lIndex].id != 0) {
+			let lCue_Data = JSON.parse(lCues[lIndex].text);
+			lList +=
+				'<a class="dropdown-item" href="#">' +
+				"Top: " +
+				lCues[lIndex].id +
+				". " +
+				lCue_Data.title +
+				"</a>";
+		}
 	}
 	// Create event listener
 	lVideoIndex.innerHTML = lList;
@@ -165,6 +167,28 @@ function getCurrentCueData() {
 					return;
 				}
 
+				if (lPlay && lCue.id != 20) {
+					lVideoElement.pause();
+					/* inputOptions can be an object or Promise */
+					let inputOptions = lQuiz[lCue.id].answers;
+					Swal.fire({
+						title: lQuiz[lCue.id].question,
+						input: "radio",
+						icon: "info",
+						inputOptions: inputOptions,
+						inputValidator: (pValue) => {
+							if (!pValue) {
+								return "You need to choose something!";
+							} else {
+								if (pValue == lQuiz[lCue.id].correctAnswer) {
+									lQuizPuntuation = lQuizPuntuation + 1;
+								}
+								lVideoElement.play();
+							}
+						},
+					});
+				}
+
 				// Pasamos el cue a un objeto de JS mediante la función parse
 				if (document.getElementById("video-info") != null) {
 					UpdateInfoSection(JSON.parse(lCue.text));
@@ -176,4 +200,8 @@ function getCurrentCueData() {
 			};
 		}
 	}
+}
+
+function createButton(text, cb) {
+	return $("<button>" + text + "</button>").on("click", cb);
 }

@@ -2,6 +2,18 @@ body {
 	background-color: #202020;
 }
 
+hgroup {
+	align-items: center;
+}
+
+#btnContainer {
+	padding-left: 20px;
+}
+
+#enableBtn {
+	font-size: 20px;
+}
+
 #video-container {
 	width: 75%;
 	height: 100%;
