@@ -137,10 +137,17 @@
 				<div class="col-lg-3 col-md-12">
 					<div id="form-container">
 						<form id="track-form">
+							<div class="row d-none">
+								<div class="col">
+									<label for="previous-songs-number">Previous Song number:</label><br />
+									<input type="number" id="previous_songs_number" name="previous_songs_number" min="1"
+										class="form-control" required /><br />
+								</div>
+							</div>
 							<div class="row">
 								<div class="col">
 									<label for="songs-number">Song number:</label><br />
-									<input type="text" id="songs_number" name="songs_number" maxlength="20"
+									<input type="number" id="songs_number" name="songs_number" min="1"
 										class="form-control" required /><br />
 								</div>
 							</div>

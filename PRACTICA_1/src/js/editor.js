@@ -52,6 +52,7 @@ $(document).ready(function () {
 function UpdateFormFields(pCue) {
 	if (pCue != undefined) {
 		let lData = JSON.parse(pCue.text);
+		document.getElementById("previous_songs_number").value = pCue.id;
 		document.getElementById("songs_number").value = pCue.id;
 		document.getElementById("title").value = lData.title;
 		document.getElementById("author").value = lData.author;

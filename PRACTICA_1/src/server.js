@@ -83,207 +83,55 @@ app.post("/add", urlencodedParser, function (req, res) {
 
 // const lineReader = require("line-reader");
 const lineByLine = require("n-readlines");
+var vttParser = require("subtitles-parser-vtt");
 
 app.post("/edit", urlencodedParser, function (req, res) {
 	let lJSON = JSON.stringify(req.body, null, 2);
+	let lFormArray = JSON.parse(lJSON);
 
-	console.log(lJSON);
+	let lFileString = fs.readFileSync(
+		"./src/public/tracks/Top13_Track.vtt",
+		"utf8"
+	);
 
-	let lArray = JSON.parse(lJSON);
-	let lEdit = false;
+	let lData = vttParser.fromVtt(lFileString, true);
 
-	const lFile = new nReadlines("./src/public/tracks/Top13_Track.vtt");
+	let lCueToEdit = lData.filter(
+		(elem) => elem.id == lFormArray.previous_songs_number
+	);
 
-	let line;
-	let lineNumber = 1;
+	lCueToEdit[0].id = lFormArray.songs_number;
+	lCueToEdit[0].startTime = lFormArray.start_time.toHHMMSS();
+	lCueToEdit[0].endTime = lFormArray.end_time.toHHMMSS();
+	delete lFormArray["pervious_songs_number"];
+	delete lFormArray["songs_number"];
+	delete lFormArray["start_time"];
+	delete lFormArray["end_time"];
+	lCueToEdit[0].text = JSON.stringify(lFormArray);
 
-	while ((line = lFile.next())) {
-		console.log(`Line ${lineNumber} has: ${line.toString("ascii")}`);
-		lineNumber++;
-	}
+	let lDataVtt = vttParser.toVtt(lDataVtt, true);
 
-	// lineReader.eachLine("./src/public/tracks/Top13_Track.vtt", function (line) {
-	// 	if (line == lArray.songs_number) {
-	// 		console.log(line);
-	// 		lEdit = true;
-	// 	}
-	// 	if (line.includes("-->") && lEdit == true) {
-	// 		console.log(line.split(" --> "));
-	// 	}
-	// 	if (line.includes("songs_title") && lEdit == true) {
-	// 		console.log(line.split(": ")[1]);
-	// 	}
-	// 	if (line.includes("authors_name") && lEdit == true) {
-	// 		console.log(line.split(": ")[1]);
-	// 	}
-	// 	if (line.includes("genre") && lEdit == true) {
-	// 		console.log(line.split(": ")[1]);
-	// 	}
-	// 	if (line.includes("year") && lEdit == true) {
-	// 		console.log(line.split(": ")[1]);
-	// 	}
-	// 	if (line.includes("video_url") && lEdit == true) {
-	// 		console.log(line.split(": ")[1]);
-	// 	}
-	// 	if (line.includes("lyrics") && lEdit == true) {
-	// 		console.log(line.split(": ")[1]);
-	// 		line.replace('"lyrics": "fdjksaghdsañlhgjk"', lArray.lyrics);
-	// 		console.log(line);
-	// 		lEdit = false;
-	// 	}
-	// 	try {
-	// 		let lNewLine = line + os.EOL;
-	// 		fs.appendFileSync("./src/public/tracks/Top13_Track_copy.vtt", lNewLine);
-	// 	} catch (err) {
-	// 		console.log("Error writing: " + err.message);
-	// 	}
-	// });
+	fs.writeFileSync("./src/public/tracks/Top13_Track.vtt", "WEBVTT" + os.EOL);
+	fs.appendFileSync("./src/public/tracks/Top13_Track.vtt", lDataVtt);
 
-	// fs.readFile(
-	// 	"./src/public/tracks/Top13_Track.vtt",
-	// 	"utf8",
-	// 	function (err, data) {
-	// 		// var newValue = data.replace("dsaffdsa", lArray.test);
-	// 		console.log(data);
-	// 		console.log(JSON.stringify(data, null, 2));
-	// 		console.log(JSON.parse(JSON.stringify(data, null, 2)));
-	// 		if (data == lArray.test) {
-	// 			console.log("same");
-	// 		}
-	// 		// fs.writeFile(
-	// 		// 	"./src/public/tracks/Top13_Track_copy.vtt",
-	// 		// 	newValue,
-	// 		// 	function () {
-	// 		// 		console.log(newValue);
-	// 		// 	}
-	// 		// );
-	// 	}
-	// );
-
-	// fs.appendFile("./src/public/tracks/Top13_Track.vtt", lNumber, function (err) {
-	// 	if (err) {
-	// 		throw err;
-	// 	} else {
-	// 		console.log("Test Saved!");
-	// 	}
-	// });
 	res.render("editor", { qs: req.query });
 });
 
 app.post("/delete", urlencodedParser, function (req, res) {
 	let lJSON = JSON.stringify(req.body, null, 2);
-
 	let lFormArray = JSON.parse(lJSON);
-	let lDelete = false;
 
-	// lineReader.eachLine("./src/public/tracks/Top13_Track.vtt", function (line) {
-	// 	console.log();
-	// 	if (line == lFormArray.songs_number) {
-	// 		lDelete = true;
-	// 	}
-	// 	if (lDelete == false && line != os.EOL) {
-	// 		try {
-	// 			let lNewLine = line == "}" ? line : line + os.EOL;
-	// 			fs.appendFileSync("./src/public/tracks/Top13_Track_copy.vtt", lNewLine);
-	// 		} catch (err) {
-	// 			console.log("Error writing: " + err.message);
-	// 		}
-	// 	} else if (line == "}" && lDelete == true) {
-	// 		lDelete = false;
-	// 	}
-	// });
-
-	let lLiner = new lineByLine("./src/public/tracks/Top13_Track.vtt");
-
-	let lLine;
-
-	while ((lLine = lLiner.next())) {
-		console.log(lLine.toString("ascii"));
-		if (lLine.toString("ascii") == lFormArray.songs_number) {
-			lDelete = true;
-		}
-		if (lDelete == false && lLine.toString("ascii") != os.EOL) {
-			try {
-				let lNewLine = lLine.toString("ascii");
-				fs.appendFileSync("./src/public/tracks/Top13_Track_copy.vtt", lNewLine);
-			} catch (err) {
-				console.log("Error writing: " + err.message);
-			}
-		} else if (lLine.toString("ascii") == "}" && lDelete == true) {
-			lDelete = false;
-			fs.appendFileSync("./src/public/tracks/Top13_Track_copy.vtt", os.EOL);
-		}
-	}
-
-	console.log("End of file");
-
-	fs.copyFileSync(
-		"./src/public/tracks/Top13_Track_copy.vtt",
-		"./src/public/tracks/Top13_Track.vtt"
-	);
-
-	res.render("editor", { qs: req.query });
-});
-
-app.post("/copy", urlencodedParser, function (req, res) {
-	console.log("??????????????????");
-	let lFile = fs.readFileSync(
-		"./src/public/tracks/Top13_Track_copy.vtt",
+	let lFileString = fs.readFileSync(
+		"./src/public/tracks/Top13_Track.vtt",
 		"utf8"
 	);
-	console.log(lFile);
-	// let lFirstLine = true;
-	// let lNewLine;
-	// lineReader.eachLine(
-	// 	"./src/public/tracks/Top13_Track_copy.vtt",
-	// 	function (line) {
-	// 		console.log("?: " + line);
-	// 		if (lFirstLine) {
-	// 			try {
-	// 				fs.writeFileSync("./src/public/tracks/Top13_Track.vtt", "", (err) => {
-	// 					if (err) {
-	// 						console.error(err);
-	// 						return;
-	// 					}
-	// 				});
-	// 				lFirstLine = false;
-	// 				console.log("1.");
-	// 				lNewLine = line + os.EOL;
-	// 				fs.appendFileSync(
-	// 					"./src/public/tracks/Top13_Track.vtt",
-	// 					lNewLine,
-	// 					(err) => {
-	// 						if (err) {
-	// 							console.error(err);
-	// 							return;
-	// 						}
-	// 						//file written successfully
-	// 					}
-	// 				);
-	// 			} catch (err) {
-	// 				console.log("Error writing: " + err.message);
-	// 			}
-	// 		} else {
-	// 			try {
-	// 				lNewLine = line + os.EOL;
-	// 				fs.appendFileSync(
-	// 					"./src/public/tracks/Top13_Track.vtt",
-	// 					lNewLine,
-	// 					(err) => {
-	// 						if (err) {
-	// 							console.error(err);
-	// 							return;
-	// 						}
-	// 						//file written successfully
-	// 					}
-	// 				);
-	// 				console.log("2.");
-	// 			} catch (err) {
-	// 				console.log("Error writing: " + err.message);
-	// 			}
-	// 		}
-	// 	}
-	// );
+	let lData = vttParser.fromVtt(lFileString, true);
+	let lNewData = lData.filter((elem) => elem.id != lFormArray.songs_number);
+
+	let lDataVtt = vttParser.toVtt(lNewData, true);
+
+	fs.writeFileSync("./src/public/tracks/Top13_Track.vtt", "WEBVTT" + os.EOL);
+	fs.appendFileSync("./src/public/tracks/Top13_Track.vtt", lDataVtt);
 
 	res.render("editor", { qs: req.query });
 });
