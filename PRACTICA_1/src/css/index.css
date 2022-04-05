@@ -6,8 +6,13 @@ hgroup {
 	align-items: center;
 }
 
+#container {
+    background-color: #183d5c;
+    margin-top: -16px;
+}
+
 #btnContainer {
-	padding-left: 20px;
+	padding-left: 50px;
 }
 
 #enableBtn {
@@ -124,4 +129,28 @@ ul {
 #editor-container {
 	height: 100% !important;
 	align-items: center;
+}
+
+footer {
+	align-items: center;
+	height: 10vh;
+}
+
+.row {
+	margin: 0px !important;
+}
+
+@media only screen and (max-width: 1200px) {
+    #volume {
+      width: 7vw !important;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #time-elapsed-container {
+      display: none !important;
+    }
+	#volume {
+		width: 10vw !important;
+	}
 }

@@ -24,8 +24,8 @@ function loadImages() {
 	let lCover = "/images/";
 	lCover =
 		lSong == "/video/Top_20.mp4"
-			? lCover + "Top13_Cover.png"
-			: lCover + "Top20_Cover.png";
+			? lCover + "Top13_Cover.jpg"
+			: lCover + "Top20_Cover.jpg";
 	lImage.setAttribute("src", lCover);
 	lImage.setAttribute("alt", lCover);
 	// Append 'img' to 'a'
@@ -35,10 +35,12 @@ function loadImages() {
 }
 
 function UpdateInfoSection(pData) {
+	document.getElementById("song-title").innerHTML = pData.title;
 	document.getElementById("songs-title").innerHTML = pData.title;
 	document.getElementById("songs-author").innerHTML = pData.author;
 	document.getElementById("songs-genre").innerHTML = pData.genre;
 	document.getElementById("songs-year").innerHTML = pData.year;
 	document.getElementById("songs-fullvideo").innerHTML =
 		'<a href="' + pData.fullVideo + '">' + pData.fullVideo + "</a>";
+	document.getElementById("songs-cover").setAttribute("src", pData.cover);
 }

@@ -4,10 +4,11 @@ $(document).ready(function () {
 		let lFormData = $("#track-form").serializeArray();
 
 		let lValidInterval = CheckStartEndInterval(
-			lFormData[5].value,
-			lFormData[6].value
+			lFormData[6].value,
+			lFormData[7].value
 		);
 		if (lValidInterval) {
+			document.getElementById("previous_songs_number").value = "";
 			$.post(
 				"/add",
 				$("#track-form").serializeArray(),

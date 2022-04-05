@@ -37,53 +37,40 @@ app.use(express.static(path.join(__dirname, "php")));
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var os = require("os");
+const vttParser = require("subtitles-parser-vtt");
 
 app.post("/add", urlencodedParser, function (req, res) {
 	let lJSON = JSON.stringify(req.body, null, 2);
 	let lFormArray = JSON.parse(lJSON);
 
-	let lNumber = os.EOL + lFormArray.songs_number + os.EOL;
-	let lInterval =
-		lFormArray.start_time.toHHMMSS() +
-		" --> " +
-		lFormArray.end_time.toHHMMSS() +
-		os.EOL;
+	let lFileString = fs.readFileSync(
+		"./src/public/tracks/Top13_Track.vtt",
+		"utf8"
+	);
+
+	if (lFileString == "")
+		fs.writeFileSync("./src/public/tracks/Top13_Track.vtt", "WEBVTT" + os.EOL);
+
+	let lData = [];
+	let lCueToAdd = {};
+
+	lCueToAdd.id = lFormArray.songs_number;
+	lCueToAdd.startTime = lFormArray.start_time.toHHMMSS();
+	lCueToAdd.endTime = lFormArray.end_time.toHHMMSS();
+	delete lFormArray["pervious_songs_number"];
 	delete lFormArray["songs_number"];
 	delete lFormArray["start_time"];
 	delete lFormArray["end_time"];
+	lCueToAdd.text = JSON.stringify(lFormArray);
 
-	if (fs.existsSync("./src/public/tracks/Top13_Track.vtt")) {
-		if (fs.readFileSync("./src/public/tracks/Top13_Track.vtt").length === 0) {
-			fs.appendFileSync(
-				"./src/public/tracks/Top13_Track.vtt",
-				"WEBVTT",
-				function (err) {
-					if (err) {
-						throw err;
-					} else {
-						console.log("File init succesfully");
-					}
-				}
-			);
-		}
-		let lDataArray = [os.EOL, lNumber, lInterval, JSON.stringify(lFormArray)];
-		for (let lIndex = 0; lIndex < lDataArray.length; lIndex++) {
-			fs.appendFileSync(
-				"./src/public/tracks/Top13_Track.vtt",
-				lDataArray[lIndex],
-				function (err) {
-					if (err) throw err;
-				}
-			);
-		}
-	}
+	lData.push(lCueToAdd);
+
+	let lDataVtt = vttParser.toVtt(lData, true);
+
+	fs.appendFileSync("./src/public/tracks/Top13_Track.vtt", lDataVtt);
 
 	res.render("editor", { qs: req.query });
 });
-
-// const lineReader = require("line-reader");
-const lineByLine = require("n-readlines");
-var vttParser = require("subtitles-parser-vtt");
 
 app.post("/edit", urlencodedParser, function (req, res) {
 	let lJSON = JSON.stringify(req.body, null, 2);
@@ -109,7 +96,7 @@ app.post("/edit", urlencodedParser, function (req, res) {
 	delete lFormArray["end_time"];
 	lCueToEdit[0].text = JSON.stringify(lFormArray);
 
-	let lDataVtt = vttParser.toVtt(lDataVtt, true);
+	let lDataVtt = vttParser.toVtt(lData, true);
 
 	fs.writeFileSync("./src/public/tracks/Top13_Track.vtt", "WEBVTT" + os.EOL);
 	fs.appendFileSync("./src/public/tracks/Top13_Track.vtt", lDataVtt);

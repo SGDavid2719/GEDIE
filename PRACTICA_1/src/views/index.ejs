@@ -11,17 +11,18 @@
 	<%- include('partials/head'); -%>
 		<link rel="stylesheet" href="/index.css" />
 </head>
+
 <%- include('partials/navigation'); -%>
 
 	<body class="d-flex flex-column min-vh-100 text-white">
-		<div id="container" class="mx-4">
+		<div id="container">
 			<header class="mb-2 mt-2">
 				<hgroup class="d-flex justify-content-center">
 					<div>
-						<h1>MUSIC MIX</h1>
+						<h1 id="song-title">MUSIC MIX</h1>
 					</div>
-					<div id="btnContainer">
-						<button id="enableBtn" class="btn btn-primary">Start Quiz</button>
+					<div id="btnContainer" class="ml-5">
+						<button id="enableBtn" class="btn btn-secondary">Start Quiz</button>
 					</div>
 				</hgroup>
 			</header>
@@ -60,6 +61,13 @@
 											</span>
 										</button>
 									</div>
+									<div class="col-2 d-flex justify-content-left">
+										<button id="next" class="btn">
+											<span title="Next">
+												<i class="fa-solid fa-forward-step"></i>
+											</span>
+										</button>
+									</div>
 									<div id="volumeSection" class="col-4 d-flex justify-content-left">
 										<button id="volume-btn" class="btn">
 											<span title="Mute (m)" class="volume-icons">
@@ -71,8 +79,7 @@
 										<input class="volume" id="volume" value="1" type="range" max="1" min="0"
 											step="0.01" />
 									</div>
-									<div class="col-1"></div>
-									<div class="col-4 d-flex justify-content-center btn">
+									<div id="time-elapsed-container" class="col-3 d-flex justify-content-center btn">
 										<time id="time-elapsed">00:00</time>
 										<span> / </span>
 										<time id="duration">00:00</time>
@@ -154,6 +161,12 @@
 							<h5 id="videos-title">VIDEO'S TITLE</h5>
 							<hr />
 							<div class="row">
+								<div class="col-3">
+									<img id="songs-cover"></img>
+								</div>
+								<div class="col-9"></div>
+							</div>
+							<div class="row mt-2">
 								<div class="col-3">
 									<p>Song's Title:</p>
 								</div>

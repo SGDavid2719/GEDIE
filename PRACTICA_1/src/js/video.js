@@ -40,8 +40,8 @@ function loadVideo() {
 			let lCover = "/images/";
 			lCover =
 				lSong == "/video/Top_20.mp4"
-					? lCover + "Top20_Cover.png"
-					: lCover + "Top13_Cover.png";
+					? lCover + "Top20_Cover.jpg"
+					: lCover + "Top13_Cover.jpg";
 			// Change poster
 			lVideo_Element.setAttribute("poster", lCover);
 			// Change title
@@ -185,6 +185,15 @@ function getCurrentCueData() {
 								if (pValue == lQuiz[lCue.id].correctAnswer) {
 									lQuizPuntuation = lQuizPuntuation + 1;
 								}
+								if (lCue.id == 0) {
+									setTimeout(() => {
+										Swal.fire({
+											icon: "info",
+											title: "Your puntuation:",
+											text: lQuizPuntuation + "/20",
+										});
+									}, 0.2);
+								}
 								lVideoElement.play();
 							}
 						},
@@ -204,6 +213,20 @@ function getCurrentCueData() {
 	}
 }
 
-function createButton(text, cb) {
-	return $("<button>" + text + "</button>").on("click", cb);
+//////////////////////////////////////////////////////////
+//						Next Video						//
+//////////////////////////////////////////////////////////
+
+function goToNextVideo() {
+	let currentCue =
+		document.getElementById("video").textTracks[0].activeCues[0].id;
+	let nextCue = currentCue - 1;
+	let str =
+		document.getElementById("video").textTracks[0].activeCues[0].track.cues[
+			nextCue
+		];
+
+	if (str.text != undefined) {
+		setActiveCue("Top: " + nextCue + ". " + JSON.parse(str.text).title);
+	}
 }

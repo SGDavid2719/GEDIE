@@ -10,9 +10,10 @@
 		<link rel="stylesheet" href="/index.css" />
 </head>
 
-<body class="d-flex flex-column text-white">
-	<div id="container" class="mx-4">
-		<%- include('partials/navigation'); -%>
+<%- include('partials/navigation'); -%>
+
+	<body class="d-flex flex-column text-white">
+		<div id="container" class="p-4">
 			<header class="mb-2 mt-2">
 				<hgroup class="d-flex justify-content-center">
 					<h1>VIDEO EDITOR</h1>
@@ -22,7 +23,7 @@
 				<div class="col-lg-8 col-md-12">
 					<!-- Good habits to keep controls for users that have JS turned off -->
 					<div id="video-container" controls>
-						<div class="row mx-2">
+						<div class="row">
 							<div id="video-content" class="">
 								<video id="video">
 									Your browser does not support the video tag
@@ -45,6 +46,13 @@
 												</span>
 											</button>
 										</div>
+										<div class="col-2 d-flex justify-content-left">
+											<button id="next" class="btn">
+												<span title="Next">
+													<i class="fa-solid fa-forward-step"></i>
+												</span>
+											</button>
+										</div>
 										<div id="volumeSection" class="col-4 d-flex justify-content-left">
 											<button id="volume-btn" class="btn">
 												<span title="Mute (m)" class="volume-icons">
@@ -56,8 +64,8 @@
 											<input class="volume" id="volume" value="1" type="range" max="1" min="0"
 												step="0.01" />
 										</div>
-										<div class="col-1"></div>
-										<div class="col-4 d-flex justify-content-center btn">
+										<div id="time-elapsed-container"
+											class="col-3 d-flex justify-content-center btn">
 											<time id="time-elapsed">00:00</time>
 											<span> / </span>
 											<time id="duration">00:00</time>
@@ -139,35 +147,35 @@
 						<form id="track-form">
 							<div class="row d-none">
 								<div class="col">
-									<label for="previous-songs-number">Previous Song number:</label><br />
+									<label for="previous_songs_number">Previous Song number:</label><br />
 									<input type="number" id="previous_songs_number" name="previous_songs_number" min="1"
-										class="form-control" required /><br />
+										class="form-control" /><br />
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
-									<label for="songs-number">Song number:</label><br />
+									<label for="songs_number">Song number:</label><br />
 									<input type="number" id="songs_number" name="songs_number" min="1"
 										class="form-control" required /><br />
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
-									<label for="songs-title">Song Title:</label><br />
+									<label for="title">Song Title:</label><br />
 									<input type="text" id="title" name="title" maxlength="35" class="form-control"
 										required /><br />
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
-									<label for="authors-name">Author's name:</label><br />
+									<label for="author">Author's name:</label><br />
 									<input type="text" id="author" name="author" maxlength="20" class="form-control"
 										required /><br />
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
-									<label for="songs-genre">Genre:</label><br />
+									<label for="genre">Genre:</label><br />
 									<input type="text" id="genre" name="genre" maxlength="20" class="form-control"
 										required /><br />
 								</div>
@@ -181,21 +189,21 @@
 							</div>
 							<div class="row">
 								<div class="col">
-									<label for="start-time">Start Time:</label><br />
+									<label for="start_time">Start Time:</label><br />
 									<input type="number" id="start_time" name="start_time" class="form-control" min="0"
 										required /><br />
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
-									<label for="end-time">End Time:</label><br />
+									<label for="end_time">End Time:</label><br />
 									<input type="number" id="end_time" name="end_time" min="0" class="form-control"
 										required /><br />
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
-									<label for="video-url">Full Video:</label><br />
+									<label for="fullVideo">Full Video:</label><br />
 									<input type="text" id="fullVideo" name="fullVideo" maxlength="20"
 										class="form-control" required /><br />
 								</div>
@@ -210,16 +218,16 @@
 							<div class="row">
 								<div id="delete-btn-container" class="col-6 d-flex flex-row d-none">
 									<button id="delete-btn" class="btn btn-danger">
-										<i class="fa-solid fa-plus"></i> Delete Cue
+										<i class="fa-solid fa-trash-can"></i> Delete Cue
 									</button>
 								</div>
 								<div id="edit-btn-container" class="col-6 d-flex flex-row-reverse d-none">
-									<button id="edit-btn" class="btn btn-primary">
-										<i class="fa-solid fa-plus"></i> Edit Cue
+									<button id="edit-btn" class="btn btn-secondary">
+										<i class="fa-solid fa-pencil"></i> Edit Cue
 									</button>
 								</div>
 								<div id="add-btn-container" class="col-12 d-flex flex-row-reverse">
-									<button id="add-btn" class="btn btn-primary">
+									<button id="add-btn" class="btn btn-secondary">
 										<i class="fa-solid fa-plus"></i> Add Cue
 									</button>
 								</div>
@@ -229,12 +237,14 @@
 				</div>
 				<div class="col-1"></div>
 			</div>
-			<%- include('partials/footer'); -%>
-	</div>
-	<!-- Video js -->
-	<script src="/video.js"></script>
-	<script src="/videoControls.js"></script>
-	<script src="/editor.js"></script>
-</body>
+
+		</div>
+		<!-- Video js -->
+		<script src="/video.js"></script>
+		<script src="/videoControls.js"></script>
+		<script src="/editor.js"></script>
+	</body>
+
+	<%- include('partials/footer'); -%>
 
 </html>
