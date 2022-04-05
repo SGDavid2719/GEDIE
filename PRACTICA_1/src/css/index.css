@@ -2,8 +2,20 @@ body {
 	background-color: #202020;
 }
 
+hgroup {
+	align-items: center;
+}
+
+#btnContainer {
+	padding-left: 20px;
+}
+
+#enableBtn {
+	font-size: 20px;
+}
+
 #video-container {
-	width: 100%;
+	width: 75%;
 	height: 100%;
 	position: relative;
 }
@@ -41,7 +53,6 @@ body {
 	display: none;
 	position: absolute;
 	bottom: 0px;
-	margin-left: 0px;
 	font-size: 12px;
 	content: attr(data-title);
 	font-weight: bold;
@@ -52,6 +63,15 @@ body {
 #button-controls-container {
 	width: 100%;
 	margin: 0;
+	align-items: center;
+}
+
+#volume {
+	visibility: hidden;
+}
+
+#volumeSection:hover > #volume {
+	visibility: visible;
 }
 
 .bottom-bar {
@@ -74,7 +94,8 @@ body {
 }
 
 .btn:hover {
-	color: #005cc8;
+	color: orange;
+	font-weight: bold;
 }
 
 .btn:focus {
@@ -88,4 +109,19 @@ img {
 ul {
 	list-style-type: none;
 	font-size: 1.1vw;
+}
+
+#song-list-btn {
+	max-height: 280px;
+	overflow-y: auto;
+} 
+
+#video-row {
+	margin-bottom: 150px;
+	justify-content: center;
+}
+
+#editor-container {
+	height: 100% !important;
+	align-items: center;
 }
