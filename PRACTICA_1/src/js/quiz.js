@@ -4,8 +4,10 @@ $(() => {
 		lQuizPuntuation = 0;
 		if (lPlay) {
 			$("#video-info").addClass("d-none");
+			$("#enableBtn").html("End Quiz");
 		} else {
 			$("#video-info").removeClass("d-none");
+			$("#enableBtn").html("Start Quiz");
 		}
 	});
 });

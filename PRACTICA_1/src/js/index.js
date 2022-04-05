@@ -35,6 +35,7 @@ function loadImages() {
 }
 
 function UpdateInfoSection(pData) {
+	document.getElementById("song-title").innerHTML = pData.title;
 	document.getElementById("songs-title").innerHTML = pData.title;
 	document.getElementById("songs-author").innerHTML = pData.author;
 	document.getElementById("songs-genre").innerHTML = pData.genre;

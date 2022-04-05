@@ -13,6 +13,12 @@ const lVideoWorks = !!document.createElement("video").canPlayType;
 const lPlayButton = document.getElementById("play");
 
 //////////////////////////////////////////////////////////
+//						Next Song Button			    //
+//////////////////////////////////////////////////////////
+
+const nextButton = document.getElementById("next");
+
+//////////////////////////////////////////////////////////
 //						Time elapsed					//
 //////////////////////////////////////////////////////////
 
@@ -65,8 +71,14 @@ $(() => {
 	lPlayButton.addEventListener("click", togglePlay);
 	lVideo.addEventListener("play", updatePlayButton);
 	lVideo.addEventListener("pause", updatePlayButton);
-
 	lVideo.addEventListener("click", togglePlay);
+
+
+	//////////////////////////////////////////////////////////
+	//						Next Song Button			    //
+	//////////////////////////////////////////////////////////
+
+	nextButton.addEventListener("click", goToNextVideo);
 
 	//////////////////////////////////////////////////////////
 	//						Time elapsed					//
@@ -178,7 +190,7 @@ function updateProgress() {
 function updateSeekTooltip(pEvent) {
 	const lSkipTo = Math.round(
 		(pEvent.offsetX / pEvent.target.clientWidth) *
-			parseInt(pEvent.target.getAttribute("max"), 10)
+		parseInt(pEvent.target.getAttribute("max"), 10)
 	);
 	lSeek.setAttribute("data-seek", lSkipTo);
 	const lTime = formatTime(lSkipTo);

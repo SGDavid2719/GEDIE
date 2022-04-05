@@ -93,6 +93,20 @@ function loadVideo() {
 }
 
 //////////////////////////////////////////////////////////
+//						Next Video						//
+//////////////////////////////////////////////////////////
+
+function goToNextVideo() {
+	let currentCue = document.getElementById("video").textTracks[0].activeCues[0].id;
+	let nextCue = currentCue - 1;
+	let str = (document.getElementById("video").textTracks[0].activeCues[0].track.cues[nextCue]);
+
+	if (str.text != undefined) {
+		setActiveCue("Top: " + nextCue + ". " + JSON.parse(str.text).title)
+	}
+}
+
+//////////////////////////////////////////////////////////
 //						Load Index						//
 //////////////////////////////////////////////////////////
 
@@ -165,7 +179,6 @@ function getCurrentCueData() {
 				// Control de errores
 				if (lCue == null) {
 					if (lEditorUrl.includes("editorpage")) UpdateFormFields(undefined);
-					console.log("Cue null!");
 					return;
 				}
 
@@ -181,10 +194,20 @@ function getCurrentCueData() {
 						inputValidator: (pValue) => {
 							if (!pValue) {
 								return "You need to choose something!";
-							} else {
+							} else { // ha contestado
 								if (pValue == lQuiz[lCue.id].correctAnswer) {
 									lQuizPuntuation = lQuizPuntuation + 1;
 								}
+								if (lCue.id == 0) {
+									setTimeout(() => {
+										Swal.fire({
+											icon: "info",
+											title: "Your puntuation:",
+											text: lQuizPuntuation + "/20",
+										});
+									}, 0.2);
+								}
+
 								lVideoElement.play();
 							}
 						},
