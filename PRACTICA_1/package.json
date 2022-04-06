@@ -1,20 +1,26 @@
 {
   "name": "practica_1",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "GEDIE - Practica 1",
+  "main": "server.js",
   "scripts": {
-    "start": "node src",
-    "dev": "nodemon src"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Santome, Alejandro Torrente, Dilpreet Singh",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.2",
     "ejs": "^3.1.6",
+    "events": "^3.3.0",
     "express": "^4.17.3",
+    "line-reader": "^0.4.0",
     "morgan": "^1.10.0",
-    "serve-favicon": "^2.5.0"
+    "n-readlines": "^1.0.1",
+    "serve-favicon": "^2.5.0",
+    "subtitles-parser-vtt": "^0.1.0",
+    "sweetalert2": "^11.4.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

@@ -1,234 +1,232 @@
-/* -------------------- Init -------------------- */
+const lUrl = new URL(window.location.href);
+var lSong = "/video/";
+lSong =
+	lUrl.searchParams.get("song") == null
+		? lSong + "Top_20.mp4"
+		: lSong + lUrl.searchParams.get("song");
 
-const lVideo = document.getElementById("video");
-const lVideoControls = document.getElementById("video-controls");
+const lEditorUrl = window.location.href;
 
-// Gets if the video can be played by the user's browser
-const lVideoWorks = !!document.createElement("video").canPlayType;
-if (lVideoWorks) {
-	// Hides native controls
-	lVideo.controls = false;
-	lVideoControls.classList.remove("hidden");
-}
+lSong = lEditorUrl.includes("editorpage") ? "/video/Top_13.mp4" : lSong;
 
-//////////////////////////////////////////////////////////
-//					Play-Pause Buttons					//
-//////////////////////////////////////////////////////////
+$(() => {
+	try {
+		loadVideo();
+		getCurrentCueData();
+	} catch (lException) {
+		console.log(lException);
+	}
+});
 
-const lPlayButton = document.getElementById("play");
-lPlayButton.addEventListener("click", togglePlay);
-lVideo.addEventListener("play", updatePlayButton);
-lVideo.addEventListener("pause", updatePlayButton);
-
-lVideo.addEventListener("click", togglePlay);
+var lPlay = false;
 
 //////////////////////////////////////////////////////////
-//						Time elapsed					//
+//						Load Video						//
 //////////////////////////////////////////////////////////
 
-const lTimeElapsed = document.getElementById("time-elapsed");
-const lDuration = document.getElementById("duration");
-lVideo.addEventListener("loadedmetadata", initializeVideo);
-lVideo.addEventListener("timeupdate", updateTimeElapsed);
-
-//////////////////////////////////////////////////////////
-//						Progress bar					//
-//////////////////////////////////////////////////////////
-
-const lProgressBar = document.getElementById("progress-bar");
-const lSeek = document.getElementById("seek");
-lVideo.addEventListener("timeupdate", updateProgress);
-const lSeekTooltip = document.getElementById("seek-tooltip");
-lSeek.addEventListener("mousemove", updateSeekTooltip);
-lSeek.addEventListener("input", skipAhead);
-
-//////////////////////////////////////////////////////////
-//						Volume							//
-//////////////////////////////////////////////////////////
-
-const lVolumeButton = document.getElementById("volume-btn");
-const lVolume = document.getElementById("volume");
-lVolume.addEventListener("input", updateVolume);
-lVideo.addEventListener("volumechange", updateVolumeIcon);
-lVolumeButton.addEventListener("click", toggleMute);
-
-//////////////////////////////////////////////////////////
-//						Full-Screen						//
-//////////////////////////////////////////////////////////
-
-const lFullscreenButton = document.getElementById("fullscreen-btn");
-const lVideoContainer = document.getElementById("video-container");
-lFullscreenButton.onclick = toggleFullScreen;
-lVideoContainer.addEventListener("fullscreenchange", updateFullscreenButton);
-
-/* -------------------- Functions -------------------- */
-
-//////////////////////////////////////////////////////////
-//					Play-Pause Buttons					//
-//////////////////////////////////////////////////////////
-
-function togglePlay() {
-	if (lVideo.paused || lVideo.ended) {
-		lVideo.play();
-	} else {
-		lVideo.pause();
+function loadVideo() {
+	let lVideo_Element = document.getElementById("video");
+	let lSource = document.createElement("source");
+	let lTrack = document.createElement("track");
+	let lSubtitle = document.createElement("track");
+	let lVideo_Can_Be_Played;
+	try {
+		lVideo_Can_Be_Played = lVideo_Element.canPlayType("video/mp4");
+		if (lVideo_Can_Be_Played) {
+			// Set video
+			lSource.setAttribute("src", lSong);
+			lSource.setAttribute("type", "video/mp4");
+			// Set cover
+			let lCover = "/images/";
+			lCover =
+				lSong == "/video/Top_20.mp4"
+					? lCover + "Top20_Cover.jpg"
+					: lCover + "Top13_Cover.jpg";
+			// Change poster
+			lVideo_Element.setAttribute("poster", lCover);
+			// Change title
+			if (document.getElementById("videos-title") != null) {
+				document.getElementById("videos-title").innerHTML = lSong.includes("20")
+					? "Top 20 - Singles"
+					: "Top 13 - 90s Hits";
+			}
+			// Change video's track
+			let lSrcTrack = "/tracks/";
+			lSrcTrack =
+				lSong == "/video/Top_20.mp4"
+					? lSrcTrack + "Top20_Track.vtt"
+					: lSrcTrack + "Top13_Track.vtt";
+			lTrack.setAttribute("id", "default-track");
+			lTrack.setAttribute("label", "Metadata");
+			lTrack.setAttribute("kind", "metadata");
+			lTrack.setAttribute("srclang", "en");
+			lTrack.setAttribute("src", lSrcTrack);
+			lTrack.setAttribute("default", true);
+			// Set event listener
+			lTrack.addEventListener("load", function () {
+				loadIndex(lTrack.track);
+			});
+			// Change video's subtitles
+			let lSrcSubtitle = "/tracks/";
+			lSrcSubtitle =
+				lSong == "/video/Top_20.mp4"
+					? lSrcSubtitle + "Top20_Subtitles.vtt"
+					: lSrcSubtitle + "Top13_Subtitles.vtt";
+			lSubtitle.setAttribute("label", "English");
+			lSubtitle.setAttribute("kind", "subtitles");
+			lSubtitle.setAttribute("srclang", "en");
+			lSubtitle.setAttribute("src", lSrcSubtitle);
+			lSubtitle.setAttribute("mode", "hidden");
+		}
+		lVideo_Element.appendChild(lSource);
+		lVideo_Element.appendChild(lTrack);
+		lVideo_Element.appendChild(lSubtitle);
+		// Disable each captioning track
+		for (var lIndex = 0; lIndex < lVideo_Element.textTracks.length; lIndex++) {
+			if (lVideo_Element.textTracks[lIndex].kind === "subtitles") {
+				lVideo_Element.textTracks[lIndex].mode = "hidden";
+			}
+		}
+	} catch (lError) {
+		console.log(lError);
 	}
 }
 
-function updatePlayButton() {
-	if (lVideo.paused) {
-		$(".fa-pause").addClass("d-none");
-		$(".fa-play").removeClass("d-none");
-		document.querySelector("#play span").setAttribute("title", "Play (k)");
-	} else {
-		$(".fa-pause").removeClass("d-none");
-		$(".fa-play").addClass("d-none");
-		document.querySelector("#play span").setAttribute("title", "Pause (k)");
+//////////////////////////////////////////////////////////
+//						Load Index						//
+//////////////////////////////////////////////////////////
+
+function loadIndex(pTrack) {
+	let lCues = pTrack.cues;
+	let lVideoIndex = document.getElementById("song-list-btn");
+	let lList = "";
+	for (let lIndex = 0; lIndex < lCues.length; lIndex++) {
+		if (lCues[lIndex].id != 0) {
+			let lCue_Data = JSON.parse(lCues[lIndex].text);
+			lList +=
+				'<a class="dropdown-item" href="#">' +
+				"Top: " +
+				lCues[lIndex].id +
+				". " +
+				lCue_Data.title +
+				"</a>";
+		}
 	}
+	// Create event listener
+	lVideoIndex.innerHTML = lList;
+	$(".dropdown-item").click(function (e) {
+		e.preventDefault();
+		setActiveCue($(this).html());
+	});
 }
 
-//////////////////////////////////////////////////////////
-//						Time elapsed					//
-//////////////////////////////////////////////////////////
-
-function formatTime(lTimeInSeconds) {
-	const lResult = new Date(lTimeInSeconds * 1000).toISOString().substr(11, 8);
-
-	return {
-		minutes: lResult.substr(3, 2),
-		seconds: lResult.substr(6, 2),
-	};
-}
-
-function initializeVideo() {
-	const lVideoDuration = Math.round(lVideo.duration);
-	lSeek.setAttribute("max", lVideoDuration);
-	lProgressBar.setAttribute("max", lVideoDuration);
-	const lTime = formatTime(lVideoDuration);
-	lDuration.innerText = `${lTime.minutes}:${lTime.seconds}`;
-	lDuration.setAttribute("datetime", `${lTime.minutes}m ${lTime.seconds}s`);
-}
-
-function updateTimeElapsed() {
-	const lTime = formatTime(Math.round(lVideo.currentTime));
-	lTimeElapsed.innerText = `${lTime.minutes}:${lTime.seconds}`;
-	lTimeElapsed.setAttribute("datetime", `${lTime.minutes}m ${lTime.seconds}s`);
-}
-
-//////////////////////////////////////////////////////////
-//						Progress bar					//
-//////////////////////////////////////////////////////////
-
-function updateProgress() {
-	lSeek.value = Math.floor(lVideo.currentTime);
-	lProgressBar.value = Math.floor(lVideo.currentTime);
-}
-
-function updateSeekTooltip(pEvent) {
-	const lSkipTo = Math.round(
-		(pEvent.offsetX / pEvent.target.clientWidth) *
-			parseInt(pEvent.target.getAttribute("max"), 10)
+function setActiveCue(pActiveCue) {
+	pActiveCue = pActiveCue.slice(
+		pActiveCue.indexOf(":") + 2,
+		pActiveCue.indexOf(".")
 	);
-	lSeek.setAttribute("data-seek", lSkipTo);
-	const lTime = formatTime(lSkipTo);
-	lSeekTooltip.textContent = `${lTime.minutes}:${lTime.seconds}`;
-	const lRect = lVideo.getBoundingClientRect();
-	lSeekTooltip.style.left = `${pEvent.pageX - lRect.left}px`;
-}
+	pActiveCue = pActiveCue.replace('<a href="">', "");
 
-function skipAhead(pEvent) {
-	const skipTo = pEvent.target.dataset.seek
-		? pEvent.target.dataset.seek
-		: pEvent.target.value;
-	lVideo.currentTime = skipTo;
-	lProgressBar.value = skipTo;
-	lSeek.value = skipTo;
-}
+	let lTracks = document.querySelector("video").textTracks;
 
-//////////////////////////////////////////////////////////
-//							Volume						//
-//////////////////////////////////////////////////////////
+	let lSelectedCue = lTracks[0].cues.getCueById(pActiveCue);
+	let lCueTime;
 
-function updateVolume() {
-	if (lVideo.muted) {
-		lVideo.muted = false;
-	}
-
-	lVideo.volume = lVolume.value;
-}
-
-// updateVolumeIcon updates the volume icon so that it correctly reflects
-// the volume of the video
-function updateVolumeIcon() {
-	document.querySelector("#volume-btn span").setAttribute("title", "Mute (m)");
-
-	if (lVideo.muted || lVideo.volume === 0) {
-		$(".fa-volume-high").addClass("d-none");
-		$(".fa-volume-low").addClass("d-none");
-		$(".fa-volume-xmark").removeClass("d-none");
-		document
-			.querySelector("#volume-btn span")
-			.setAttribute("title", "Unmute (m)");
-	} else if (lVideo.volume > 0 && lVideo.volume <= 0.5) {
-		$(".fa-volume-high").addClass("d-none");
-		$(".fa-volume-low").removeClass("d-none");
-		$(".fa-volume-xmark").addClass("d-none");
-	} else {
-		$(".fa-volume-high").removeClass("d-none");
-		$(".fa-volume-low").addClass("d-none");
-		$(".fa-volume-xmark").addClass("d-none");
-	}
-}
-
-// toggleMute mutes or unmutes the video when executed
-// When the video is unmuted, the volume is returned to the value
-// it was set to before the video was muted
-function toggleMute() {
-	lVideo.muted = !lVideo.muted;
-
-	if (lVideo.muted) {
-		lVolume.setAttribute("data-volume", lVolume.value);
-		lVolume.value = 0;
-	} else {
-		lVolume.value = lVolume.dataset.volume;
+	if (lSelectedCue != null) {
+		lCueTime = lSelectedCue.startTime;
+		let lVideo = document.getElementById("video");
+		lVideo.currentTime = lCueTime;
 	}
 }
 
 //////////////////////////////////////////////////////////
-//						Full-Screen						//
+//						   Cues						    //
 //////////////////////////////////////////////////////////
 
-// toggleFullScreen toggles the full screen state of the video
-// If the browser is currently in fullscreen mode,
-// then it should exit and vice versa.
-function toggleFullScreen() {
-	if (document.fullscreenElement) {
-		document.exitFullscreen();
-	} else if (document.webkitFullscreenElement) {
-		// Need this to support Safari
-		document.webkitExitFullscreen();
-	} else if (lVideoContainer.webkitRequestFullscreen) {
-		// Need this to support Safari
-		lVideoContainer.webkitRequestFullscreen();
-	} else {
-		lVideoContainer.requestFullscreen();
+function getCurrentCueData() {
+	var lVideoElement = document.querySelector("video");
+	// Get all text tracks for the current player.
+	var lTracks_Array = lVideoElement.textTracks;
+
+	for (var i = 0; i < lTracks_Array.length; i++) {
+		var lTrack = lTracks_Array[i];
+
+		// Find the English captions track and mark it as "showing".
+		if (lTrack.kind === "metadata" && lTrack.language === "en") {
+			lTrack.mode = "showing";
+			lTrack.oncuechange = function () {
+				// Obtenemos el cue en cuestión
+				if (this.activeCues.length == 1) {
+					lCue = this.activeCues[0];
+				} else {
+					lCue = this.activeCues[1];
+				}
+
+				// Control de errores
+				if (lCue == null) {
+					if (lEditorUrl.includes("editorpage")) UpdateFormFields(undefined);
+					console.log("Cue null!");
+					return;
+				}
+
+				if (lPlay && lCue.id != 20) {
+					lVideoElement.pause();
+					/* inputOptions can be an object or Promise */
+					let inputOptions = lQuiz[lCue.id].answers;
+					Swal.fire({
+						title: lQuiz[lCue.id].question,
+						input: "radio",
+						icon: "info",
+						inputOptions: inputOptions,
+						inputValidator: (pValue) => {
+							if (!pValue) {
+								return "You need to choose something!";
+							} else {
+								if (pValue == lQuiz[lCue.id].correctAnswer) {
+									lQuizPuntuation = lQuizPuntuation + 1;
+								}
+								if (lCue.id == 0) {
+									setTimeout(() => {
+										Swal.fire({
+											icon: "info",
+											title: "Your puntuation:",
+											text: lQuizPuntuation + "/20",
+										});
+									}, 0.2);
+								}
+								lVideoElement.play();
+							}
+						},
+					});
+				}
+
+				// Pasamos el cue a un objeto de JS mediante la función parse
+				if (document.getElementById("video-info") != null) {
+					UpdateInfoSection(JSON.parse(lCue.text));
+				}
+
+				if (lEditorUrl.includes("editorpage")) {
+					UpdateFormFields(lCue);
+				}
+			};
+		}
 	}
 }
 
-function updateFullscreenButton() {
-	console.log("1");
-	if (document.fullscreenElement) {
-		console.log("2");
-		document
-			.querySelector("#fullscreen-btn span")
-			.setAttribute("title", "Exit full screen (f)");
-		$(".fa-compress").removeClass("d-none");
-		$(".fa-expand").addClass("d-none");
-	} else {
-		document
-			.querySelector("#fullscreen-btn span")
-			.setAttribute("title", "Full screen (f)");
-		$(".fa-expand").removeClass("d-none");
-		$(".fa-compress").addClass("d-none");
+//////////////////////////////////////////////////////////
+//						Next Video						//
+//////////////////////////////////////////////////////////
+
+function goToNextVideo() {
+	let currentCue =
+		document.getElementById("video").textTracks[0].activeCues[0].id;
+	let nextCue = currentCue - 1;
+	let str =
+		document.getElementById("video").textTracks[0].activeCues[0].track.cues[
+			nextCue
+		];
+
+	if (str.text != undefined) {
+		setActiveCue("Top: " + nextCue + ". " + JSON.parse(str.text).title);
 	}
 }

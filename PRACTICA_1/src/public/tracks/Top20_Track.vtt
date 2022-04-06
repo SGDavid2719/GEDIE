@@ -1,0 +1,253 @@
+WEBVTT
+
+20
+00:00:00.000 --> 00:00:09.000
+{
+    "title":"All about that bass",
+    "author":"Meghan Trainor",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=7PCkvCPvDXk",
+    "lyrics":"Because you know I'm all about that bass",
+    "cover":"/images/album_covers/all_about_that_bass.jpg"
+}
+
+19
+00:00:09.000 --> 00:00:21.000
+{
+    "title":"ONLY",
+    "author":"Nicki Minaj, Drake, Lil Wayne, Chris Brown",
+    "genre":"Hip hop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=zXtsGAkyeIo",
+    "lyrics":"Yo, I never fucked Wayne, I never fucked Drake",
+    "cover":"/images/album_covers/only.jpg"
+}
+
+18
+00:00:21.000 --> 00:00:33.000
+{
+    "title":"Blame",
+    "author":"Calvin Harris, John Newman",
+    "genre":"House",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=6ACl8s_tBzE",
+    "lyrics":"Can't be sleepin'",
+    "cover":"/images/album_covers/blame.jpg"
+}
+
+17
+00:00:33.000 --> 00:00:44.000
+{
+    "title":"Gold",
+    "author":"Imagine Dragons",
+    "genre":"Indie",
+    "year":2015,
+    "fullVideo":"https://www.youtube.com/watch?v=Rl3ELiPXFRo",
+    "lyrics":"First comes the blessing of all that you've dreamed",
+    "cover":"/images/album_covers/gold.jpg"
+}
+
+16
+00:00:44.000 --> 00:00:57.000
+{
+    "title":"Shake it off",
+    "author":"Taylor Swift",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=nfWlot6h_JM",
+    "lyrics":"I stay out too late, got nothing in my brain",
+    "cover":"/images/album_covers/shake_it_off.jpg"
+}
+
+15
+00:00:57.000 --> 00:01:09.000
+{
+    "title":"Masterpiece",
+    "author":"Jessie J",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=PTOFEgJ9zzI",
+    "lyrics":"So much pressure, why so loud?",
+    "cover":"/images/album_covers/masterpiece.jpg"
+}
+
+14
+00:01:09.000 --> 00:01:21.000
+{
+    "title":"L.A. LOVE (la la)",
+    "author":"Fergie",
+    "genre":"Hip hop",
+    "year":2015,
+    "fullVideo":"https://www.youtube.com/watch?v=GLyP0B2Q-R4",
+    "lyrics":"La la la la la",
+    "cover":"/images/album_covers/la_love.jpg"
+}
+
+13
+00:01:21.000 --> 00:01:33.000
+{
+    "title":"Time of our lives",
+    "author":"Pitbull, Ne-Yo",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=bTXJQ5ql5Fw",
+    "lyrics":"I knew my rent was gon' be late about a week ago",
+    "cover":"/images/album_covers/time_of_our_lives.jpg"
+}
+
+12
+00:01:33.000 --> 00:01:45.000
+{
+    "title":"I don't mind",
+    "author":"Usher, Juicy",
+    "genre":"Soul",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=nSKUXqJ5l1k",
+    "lyrics":"Yeah",
+    "cover":"/images/album_covers/i_dont_mind.jpg"
+}
+
+11
+00:01:45.000 --> 00:01:55.000
+{
+    "title":"I'm not the only one",
+    "author":"Sam Smith",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=nCkpzqqog4k",
+    "lyrics":"You and me we made a vow",
+    "cover":"/images/album_covers/im_not_the_only_one.jpg"
+}
+
+10
+00:01:55.000 --> 00:02:07.000
+{
+    "title":"Outside",
+    "author":"Calvin Harris, Ellie Goulding",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=J9NQFACZYEU",
+    "lyrics":"Look at what you've done",
+    "cover":"/images/album_covers/outside.jpg"
+}
+
+9
+00:02:07.000 --> 00:02:19.000
+{
+    "title":"I don't fuck with you",
+    "author":"Big Sean, E-40",
+    "genre":"Rap",
+    "year":2015,
+    "fullVideo":"https://www.youtube.com/watch?v=cZaJYDPY-YQ",
+    "lyrics":"Uh-huh",
+    "cover":"/images/album_covers/i_dont_fuck_with_you.jpg"
+}
+
+8
+00:02:19.000 --> 00:02:32.000
+{
+    "title":"The hear wants what it wants",
+    "author":"Selena Gomez",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=ij_0p_6qTss",
+    "lyrics":"You got me sippin' on something",
+    "cover":"/images/album_covers/the_heart_wants_what_it_wants.jpg"
+}
+
+7
+00:02:32.000 --> 00:02:42.000
+{
+    "title":"Thinking out loud",
+    "author":"Ed Sheeran",
+    "genre":"Soul",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=lp-EO5I60KA",
+    "lyrics":"When your legs don't work like they used to before",
+    "cover":"/images/album_covers/thinking_outloud.jpg"
+}
+
+6
+00:02:42.000 --> 00:02:53.000
+{
+    "title":"Take me to church",
+    "author":"Hozier",
+    "genre":"Indie Rock",
+    "year":2013,
+    "fullVideo":"https://www.youtube.com/watch?v=PVjiKRfKpPI",
+    "lyrics":"My lover's got humor",
+    "cover":"/images/album_covers/take_me_to_church.jpg"
+}
+
+5
+00:02:53.000 --> 00:03:04.000
+{
+    "title":"Lips are movin",
+    "author":"Meghan Trainor",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=qDc_5zpBj7s",
+    "lyrics":"If your lips are moving, if your lips are moving",
+    "cover":"/images/album_covers/lips_are_movin.jpg"
+}
+
+4
+00:03:04.000 --> 00:03:16.000
+{
+    "title":"Love me harder",
+    "author":"Ariana Grande, The Weeknd",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=g5qU7p7yOY8",
+    "lyrics":"Tell me something I need to know",
+    "cover":"/images/album_covers/love_me_harder.jpg"
+}
+
+3
+00:03:16.000 --> 00:03:29.000
+{
+    "title":"Jealous",
+    "author":"Nick Jonas",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=yw04QD1LaB0",
+    "lyrics":"I don't like the way he's looking at you",
+    "cover":"/images/album_covers/jealous.jpg"
+}
+
+2
+00:03:29.000 --> 00:03:41.000
+{
+    "title":"Blank Space",
+    "author":"Taylor Swift",
+    "genre":"Pop",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=e-ORhEE9VVg",
+    "lyrics":"Nice to meet you, where you been?",
+    "cover":"/images/album_covers/blank_space.jpg"
+}
+
+1
+00:03:41.000 --> 00:04:00.000
+{
+    "title":"Uptown Funk",
+    "author":"Mark Ronson, Bruno Mars",
+    "genre":"Funk",
+    "year":2014,
+    "fullVideo":"https://www.youtube.com/watch?v=OPf0YbXqDm0",
+    "lyrics":"This hit, that ice cold",
+    "cover":"/images/album_covers/uptown_funk.jpg"
+}
+
+0
+00:04:00.000 --> 00:04:03.000
+{
+    "title":"",
+    "author":"",
+    "genre":"",
+    "year":"",
+    "fullVideo":"",
+    "lyrics":"",
+    "cover":
+}
