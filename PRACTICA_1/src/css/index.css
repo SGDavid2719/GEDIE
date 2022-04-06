@@ -94,12 +94,16 @@ hgroup {
 }
 
 .btn {
-	color: white;
-	border: none;
+    color: white;
+    border: none;
 }
 
 .btn:hover {
-	color: orange;
+    color: #d8eb34;
+}
+
+.outVideo:hover{
+    color: white;
 }
 
 .btn:focus {
@@ -146,10 +150,15 @@ footer {
 }
 
 @media only screen and (max-width: 900px) {
-    #time-elapsed-container {
+    #time-elapsed-container,
+	#song-list {
       display: none !important;
     }
 	#volume {
 		width: 10vw !important;
 	}
+}
+
+select::-ms-expand {
+	display: none;
 }

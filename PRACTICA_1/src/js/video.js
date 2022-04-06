@@ -200,7 +200,7 @@ function getCurrentCueData() {
 				}
 
 				// Pasamos el cue a un objeto de JS mediante la función parse
-				if (document.getElementById("video-info") != null) {
+				if (!lEditorUrl.includes("editorpage") && lCue.text != undefined) {
 					UpdateInfoSection(JSON.parse(lCue.text));
 				}
 

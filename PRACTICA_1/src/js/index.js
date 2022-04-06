@@ -41,6 +41,11 @@ function UpdateInfoSection(pData) {
 	document.getElementById("songs-genre").innerHTML = pData.genre;
 	document.getElementById("songs-year").innerHTML = pData.year;
 	document.getElementById("songs-fullvideo").innerHTML =
-		'<a href="' + pData.fullVideo + '">' + pData.fullVideo + "</a>";
+		'<a href="' +
+		pData.fullVideo +
+		'" class="link-warning">' +
+		"Youtube Link" +
+		"</a>";
 	document.getElementById("songs-cover").setAttribute("src", pData.cover);
+	document.getElementById("video-info").style.display = "inline-block";
 }
