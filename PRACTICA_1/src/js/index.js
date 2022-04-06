@@ -1,14 +1,5 @@
-const lUrl = new URL(window.location.href);
-var lSong = "/video/";
-lSong =
-	lUrl.searchParams.get("song") == null
-		? lSong + "Top_20.mp4"
-		: lSong + lUrl.searchParams.get("song");
-
 $(() => {
-	loadVideo();
 	loadImages();
-	getCurrentCueData();
 });
 
 //////////////////////////////////////////////////////////
@@ -139,8 +130,8 @@ function loadImages() {
 	let lCover = "/images/";
 	lCover =
 		lSong == "/video/Top_20.mp4"
-			? lCover + "Top13_Cover.png"
-			: lCover + "Top20_Cover.png";
+			? lCover + "Top13_Cover.jpg"
+			: lCover + "Top20_Cover.jpg";
 	lImage.setAttribute("src", lCover);
 	lImage.setAttribute("alt", lCover);
 	// Append 'img' to 'a'
@@ -149,47 +140,13 @@ function loadImages() {
 	lOtherVideos_Element.appendChild(lLink_Element);
 }
 
-//////////////////////////////////////////////////////////
-//						   Cues						    //
-//////////////////////////////////////////////////////////
-
-function getCurrentCueData() {
-	var videoElement = document.querySelector("video");
-	// Get all text tracks for the current player.
-	var tracks = videoElement.textTracks;
-
-	for (var i = 0; i < tracks.length; i++) {
-		var track = tracks[i];
-
-		// Find the English captions track and mark it as "showing".
-		if (track.kind === "metadata" && track.language === "en") {
-			track.mode = "showing";
-			track.oncuechange = function () {
-				// Obtenemos el cue en cuestión
-				if (this.activeCues.length == 1) {
-					cue = this.activeCues[0];
-				} else {
-					cue = this.activeCues[1];
-				}
-
-				// Control de errores
-				if (cue == null) {
-					console.log("Cue null!");
-					return;
-				}
-
-				// Pasamos el cue a un objeto de JS mediante la función parse
-				var obj = JSON.parse(cue.text);
-				UpdateInfoSection(obj);
-			};
-		}
-	}
-}
-
 function UpdateInfoSection(pData) {
+	document.getElementById("song-title").innerHTML = pData.title;
 	document.getElementById("songs-title").innerHTML = pData.title;
 	document.getElementById("songs-author").innerHTML = pData.author;
 	document.getElementById("songs-genre").innerHTML = pData.genre;
 	document.getElementById("songs-year").innerHTML = pData.year;
-	document.getElementById("songs-fullvideo").innerHTML = pData.fullVideo;
+	document.getElementById("songs-fullvideo").innerHTML =
+		'<a href="' + pData.fullVideo + '">' + pData.fullVideo + "</a>";
+	document.getElementById("songs-cover").setAttribute("src", pData.cover);
 }
