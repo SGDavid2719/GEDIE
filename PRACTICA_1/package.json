@@ -20,7 +20,8 @@
     "n-readlines": "^1.0.1",
     "serve-favicon": "^2.5.0",
     "subtitles-parser-vtt": "^0.1.0",
-    "sweetalert2": "^11.4.8"
+    "sweetalert2": "^11.4.8",
+    "toml": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

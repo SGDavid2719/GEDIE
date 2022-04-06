@@ -16,16 +16,6 @@
 
 	<body class="d-flex flex-column min-vh-100 text-white">
 		<div id="container">
-			<header class="mb-2 mt-2">
-				<hgroup class="d-flex justify-content-center">
-					<div>
-						<h1 id="song-title">MUSIC MIX</h1>
-					</div>
-					<div id="btnContainer" class="ml-5">
-						<button id="enableBtn" class="btn btn-secondary">Start Quiz</button>
-					</div>
-				</hgroup>
-			</header>
 			<div class="row">
 				<div class="col-9"></div>
 				<div class="col-2">
@@ -37,6 +27,21 @@
 			</div>
 			<div id="video-row" class="row">
 				<!-- Good habits to keep controls for users that have JS turned off -->
+				<div class="row">
+					<div class="col-lg-9">
+						<header class="mb-2 mt-2">
+							<hgroup class="container d-flex justify-content-between">
+								<div>
+									<h1 id="song-title">MUSIC MIX</h1>
+								</div>
+								<div id="btnContainer" class="ml-5">
+									<button id="enableBtn" class="btn btn-secondary">Start Quiz</button>
+								</div>
+							</hgroup>
+						</header>
+					</div>
+					<div class="col-lg-3"></div>
+				</div>
 				<div id="video-container" controls>
 					<div class="row mx-2">
 						<div id="video-content" class="">
@@ -87,31 +92,28 @@
 									<div class="col-1"></div>
 								</div>
 								<div id="right-controls" class="col-4 d-flex justify-content-right p-0">
-									<div class="col-3 d-flex justify-content-left">
+									<div class="col-1 d-flex justify-content-left m-2">
 										<button id="captioning-btn" class="btn">
 											<span title="Subtitles (c)">
 												<i class="fa-solid fa-closed-captioning"></i>
 											</span>
 										</button>
 									</div>
-									<div class="col-2 d-flex justify-content-left m-2">
+									<div id="song-list" class="col-1 d-flex justify-content-left m-2">
 										<div class="btn-group dropup">
-											<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
+											<button type="button" class="btn" data-toggle="dropdown"
 												aria-haspopup="true" aria-expanded="false">
 												<span title="Song List">
 													<i class="fa-solid fa-list"></i>
 												</span>
 											</button>
 											<div id="song-list-btn" class="dropdown-menu overflow-auto">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
 											</div>
 										</div>
 									</div>
-									<div class="col-2 d-flex justify-content-left m-2">
+									<div class="col-1 d-flex justify-content-left m-2">
 										<div id="playback-btn" class="btn-group dropup">
-											<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
+											<button type="button" class="btn" data-toggle="dropdown"
 												aria-haspopup="true" aria-expanded="false" id="playback">
 												<span title="Video Playback">
 													<i class="fa-solid fa-gauge"></i>
@@ -129,9 +131,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-2 d-flex justify-content-left">
-										<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false" id="settings">
+									<div class="col-1 d-flex justify-content-left m-2">
+										<button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false" id="settings">
 											<i class="fa-solid fa-gear"></i>
 										</button>
 										<div class="dropdown-menu" aria-labelledby="settings">
@@ -142,7 +144,7 @@
 											<a class="dropdown-item">480p</a>
 										</div>
 									</div>
-									<div class="col-3 d-flex justify-content-right">
+									<div class="col-1 d-flex justify-content-right m-2">
 										<button id="fullscreen-btn" class="btn">
 											<span title="Full screen (f)" class="screen-icons">
 												<i class="fa-solid fa-expand"></i>
@@ -155,65 +157,59 @@
 						</div>
 					</div>
 				</div>
-				<div class="row mt-3">
-					<div class="col-md-8 col-sm-12">
-						<div id="video-info">
+				<div class="row mt-3 col-md-3">
+					<div class="col-md-12 col-sm-12 mt-4 justify-content-center d-flex">
+						<div id="video-info" style="display: none;" class="justify-content-center">
 							<h5 id="videos-title">VIDEO'S TITLE</h5>
 							<hr />
-							<div class="row">
-								<div class="col-3">
-									<img id="songs-cover"></img>
-								</div>
-								<div class="col-9"></div>
+							<div class="col-12 justify-content-center d-flex">
+								<img id="songs-cover"></img>
 							</div>
-							<div class="row mt-2">
-								<div class="col-3">
-									<p>Song's Title:</p>
+							<div class="video-info m-3">
+								<div class="row">
+									<div class="col-lg-5">
+										<b>Song's Title:</b>
+									</div>
+									<div class="col-lg-7">
+										<p id="songs-title"></p>
+									</div>
 								</div>
-								<div class="col-3">
-									<p id="songs-title"></p>
+								<div class="row">
+									<div class="col-lg-5">
+										<b>Author:</b>
+									</div>
+									<div class="col-lg-7">
+										<p id="songs-author"></p>
+									</div>
 								</div>
-								<div class="col-6"></div>
-							</div>
-							<div class="row">
-								<div class="col-3">
-									<p>Author:</p>
+								<div class="row">
+									<div class="col-lg-5">
+										<b>Song's Genre:</b>
+									</div>
+									<div class="col-lg-7">
+										<p id="songs-genre"></p>
+									</div>
 								</div>
-								<div class="col-3">
-									<p id="songs-author"></p>
+								<div class="row">
+									<div class="col-lg-5">
+										<b>Year:</b>
+									</div>
+									<div class="col-lg-7">
+										<p id="songs-year"></p>
+									</div>
 								</div>
-								<div class="col-6"></div>
-							</div>
-							<div class="row">
-								<div class="col-3">
-									<p>Song's Genre:</p>
+								<div class="row">
+									<div class="col-lg-5">
+										<b>Full video:</b>
+									</div>
+									<div class="col-lg-7">
+										<a style="text-decoration:none;" id="songs-fullvideo"></a>
+									</div>
 								</div>
-								<div class="col-3">
-									<p id="songs-genre"></p>
-								</div>
-								<div class="col-6"></div>
-							</div>
-							<div class="row">
-								<div class="col-3">
-									<p>Year:</p>
-								</div>
-								<div class="col-3">
-									<p id="songs-year"></p>
-								</div>
-								<div class="col-6"></div>
-							</div>
-							<div class="row">
-								<div class="col-3">
-									<p>Song's Full Video Link:</p>
-								</div>
-								<div class="col-5">
-									<p id="songs-fullvideo"></p>
-								</div>
-								<div class="col-4"></div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-12">
+					<div class="col-md-12 col-sm-12">
 						<div id="other-videos">
 							<h5>OTHER VIDEOS</h5>
 							<hr />
