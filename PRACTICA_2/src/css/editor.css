@@ -1,0 +1,10 @@
+.modal {
+    color: black !important;
+}
+
+td > button {
+    color: white;
+    background-color: #212529;
+    border-radius: 5px;
+    border-color: #183d5c;
+}
