@@ -120,8 +120,7 @@ $(() => {
 	//					Keyboard shortcuts					//
 	//////////////////////////////////////////////////////////
 
-	if (!lEditorUrl.includes("editorpage"))
-		document.addEventListener("keyup", keyboardShortcuts);
+	//if (!lEditorUrl.includes("editorpage"))document.addEventListener("keyup", keyboardShortcuts);
 });
 
 /* -------------------- Functions -------------------- */
@@ -155,12 +154,22 @@ function updatePlayButton() {
 //////////////////////////////////////////////////////////
 
 function formatTime(lTimeInSeconds) {
-	const lResult = new Date(lTimeInSeconds * 1000).toISOString().substr(11, 8);
+	console.log("lTimeInSeconds");
+	console.log(lTimeInSeconds);
 
-	return {
-		minutes: lResult.substr(3, 2),
-		seconds: lResult.substr(6, 2),
-	};
+	if (!isNaN(lTimeInSeconds)) {
+		const lResult = new Date(lTimeInSeconds * 1000).toISOString().substr(11, 8);
+
+		return {
+			minutes: lResult.substr(3, 2),
+			seconds: lResult.substr(6, 2),
+		};
+	} else {
+		return {
+			minutes: 00,
+			seconds: 00,
+		};
+	}
 }
 
 function initializeVideo() {

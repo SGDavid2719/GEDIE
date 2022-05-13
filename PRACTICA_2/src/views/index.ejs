@@ -10,6 +10,7 @@
 	</title>
 	<%- include('partials/head'); -%>
 		<link rel="stylesheet" href="/index.css" />
+		<script src="/recieve.js"></script>
 </head>
 
 <body class="text-white">
@@ -17,7 +18,19 @@
 	<%- include('partials/navigation'); -%>
 
 		<div id="indexContainer">
+
 			<div id="video-row" class="row m-0 h-100">
+
+				<div class="col-12 col-md-4 d-flex justify-content-center">
+					<button id="hls-btn" class="btn btn-secondary">HLS</button>
+				</div>
+				<div class="col-12 col-md-4 d-flex justify-content-center">
+					<button id="dash-btn" class="btn btn-secondary">DASH</button>
+				</div>
+				<div class="col-12 col-md-4 d-flex justify-content-center">
+					<button id="cmaf-btn" class="btn btn-secondary">CMAF</button>
+				</div>
+
 				<!-- Good habits to keep controls for users that have JS turned off -->
 				<div id="video-container" class="col-12 px-5 py-2" controls>
 					<div class="row">
@@ -219,49 +232,6 @@
 		<script src="/video.js"></script>
 		<script src="/videoControls.js"></script>
 		<script src="/index.js"></script>
-
-		<script>
-			// var __l__Video = document.getElementById('video');
-			// var __l__Video__Src = 'http://my.streamURL.com/playlist.m3u8';
-			// if (__l__Video.canPlayType('application/vnd.apple.mpegurl')) {
-			// 	// Apple native support
-			// 	__l__Video.src = __l__Video__Src;
-			// } else if (Hls.isSupported()) {
-				//
-			// 	// Others
-			// 	var __l__Hls = new Hls();
-			// 	// bind them together
-			// 	__l__Hls.attachMedia(__l__Video);
-			// 	__l__Hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-			// 		console.log('video and hls.js are now bound together !');
-			// 		__l__Hls.loadSource(__l__Video__Src);
-			// 		__l__Hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-			// 			console.log(
-			// 				'manifest loaded, found ' + data.levels.length + ' quality level'
-			// 			);
-			// 		});
-			// 	});
-			// 	__l__Hls.on(Hls.Events.ERROR, function (event, data) {
-			// 		if (data.fatal) {
-			// 			switch (data.type) {
-			// 				case Hls.ErrorTypes.NETWORK_ERROR:
-			// 					// try to recover network error
-			// 					console.log('fatal network error encountered, try to recover');
-			// 					__l__Hls.startLoad();
-			// 					break;
-			// 				case Hls.ErrorTypes.MEDIA_ERROR:
-			// 					console.log('fatal media error encountered, try to recover');
-			// 					__l__Hls.recoverMediaError();
-			// 					break;
-			// 				default:
-			// 					// cannot recover
-			// 					__l__Hls.destroy();
-			// 					break;
-			// 			}
-			// 		}
-			// 	});
-			// }
-		</script>
 
 		<%- include('partials/footer'); -%>
 </body>

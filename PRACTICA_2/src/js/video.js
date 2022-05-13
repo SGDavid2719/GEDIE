@@ -13,6 +13,7 @@ $(() => {
 	try {
 		loadVideo();
 		getCurrentCueData();
+		adaptiveStreaming();
 	} catch (lException) {
 		console.log(lException);
 	}
@@ -35,6 +36,7 @@ function loadVideo() {
 		if (lVideo_Can_Be_Played) {
 			// Set video
 			lSource.setAttribute("src", lSong);
+			lSource.setAttribute("id", "videoSrc");
 			lSource.setAttribute("type", "video/mp4");
 			// Set cover
 			let lCover = "/images/";
@@ -228,4 +230,70 @@ function goToNextVideo() {
 	if (str.text != undefined) {
 		setActiveCue("Top: " + nextCue + ". " + JSON.parse(str.text).title);
 	}
+}
+
+function adaptiveStreaming() {
+	var video = document.getElementById("video");
+
+	var player = dashjs.MediaPlayer().create();
+
+	// FORCE DASH (NATIVE)
+	console.log("dash-btn");
+	player.initialize(video, "/video/dash/Top_20.mpd", true);
+
+	// HLS
+	$("#hls-btn").click(() => {
+		console.log("hls-btn");
+
+		var videoSrc = "/video/hls/master.m3u8";
+		if (video.canPlayType("application/vnd.apple.mpegurl")) {
+			// Apple native support
+			video.src = videoSrc;
+		} else if (Hls.isSupported()) {
+			// Others
+			var hls = new Hls();
+			// bind them together
+			hls.attachMedia(video);
+			hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+				console.log("video and hls.js are now bound together !");
+				hls.loadSource(videoSrc);
+				hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+					console.log(
+						"manifest loaded, found " + data.levels.length + " quality level"
+					);
+				});
+			});
+			hls.on(Hls.Events.ERROR, function (event, data) {
+				if (data.fatal) {
+					switch (data.type) {
+						case Hls.ErrorTypes.NETWORK_ERROR:
+							// try to recover network error
+							console.log("fatal network error encountered, try to recover");
+							hls.startLoad();
+							break;
+						case Hls.ErrorTypes.MEDIA_ERROR:
+							console.log("fatal media error encountered, try to recover");
+							hls.recoverMediaError();
+							break;
+						default:
+							// cannot recover
+							hls.destroy();
+							break;
+					}
+				}
+			});
+		}
+	});
+
+	// DASH
+	$("#dash-btn").click(() => {
+		console.log("dash-btn");
+
+		player.initialize(video, "/video/dash/Top_20.mpd", true);
+	});
+
+	// CMAF
+	$("#cmaf-btn").click(() => {
+		console.log("cmaf-btn");
+	});
 }
