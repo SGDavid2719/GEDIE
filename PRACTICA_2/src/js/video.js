@@ -35,7 +35,7 @@ function loadVideo() {
 		lVideo_Can_Be_Played = lVideo_Element.canPlayType("video/mp4");
 		if (lVideo_Can_Be_Played) {
 			// Set video
-			lSource.setAttribute("src", lSong);
+			//lSource.setAttribute("src", lSong);
 			lSource.setAttribute("id", "videoSrc");
 			lSource.setAttribute("type", "video/mp4");
 			// Set cover
@@ -235,11 +235,11 @@ function goToNextVideo() {
 function adaptiveStreaming() {
 	var video = document.getElementById("video");
 
-	var player = dashjs.MediaPlayer().create();
+	//var player = dashjs.MediaPlayer().create();
 
 	// FORCE DASH (NATIVE)
 	console.log("dash-btn");
-	player.initialize(video, "/video/dash/Top_20.mpd", true);
+	//player.initialize(video, "/video/dash/Top_20.mpd", false);
 
 	// HLS
 	$("#hls-btn").click(() => {
@@ -287,9 +287,11 @@ function adaptiveStreaming() {
 
 	// DASH
 	$("#dash-btn").click(() => {
+		let source = document.getElementById("videoSrc");
 		console.log("dash-btn");
 
-		player.initialize(video, "/video/dash/Top_20.mpd", true);
+		source.src = "/video/dash/Top_20.mpd";
+		source.type = "application/dash+xml";
 	});
 
 	// CMAF
