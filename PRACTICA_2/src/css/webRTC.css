@@ -1,0 +1,10 @@
+#chat-text-div {
+    min-height: 215px;
+    max-height: 215px;
+    border: 2px solid red;
+    overflow: scroll;
+}
+
+#private-chat-input {
+    width: 70%;
+}
