@@ -235,11 +235,6 @@ function goToNextVideo() {
 function adaptiveStreaming() {
 	var video = document.getElementById("video");
 
-	// FORCE DASH (NATIVE)
-	console.log("dash-btn");
-	player = dashjs.MediaPlayer().create();
-	player.initialize(video, "/video/cmaf/Top_20.mpd", false);
-
 	// HLS
 	$("#hls-btn").click(() => {
 		console.log("hls-btn");
@@ -262,6 +257,22 @@ function adaptiveStreaming() {
 					console.log(
 						"manifest loaded, found " + data.levels.length + " quality level"
 					);
+
+					const qualities = hls.levels.map((level) => level.height);
+
+					let qualitiesOptions = document.getElementById("qualitiesOptions");
+					let qualitiesOptionsHTML = "";
+
+					qualities.forEach((quality) => {
+						qualitiesOptionsHTML +=
+							"<li><a class='dropdown-item' onClick='updateHLSQuality(" +
+							quality +
+							")'>" +
+							quality +
+							"</a>";
+					});
+
+					qualitiesOptions.innerHTML = qualitiesOptionsHTML;
 				});
 			});
 			hls.on(Hls.Events.ERROR, function (event, data) {
@@ -283,15 +294,62 @@ function adaptiveStreaming() {
 					}
 				}
 			});
+			window.hls = hls;
 		}
 	});
 
 	// DASH
 	$("#dash-btn").click(() => {
+		var player = dashjs.MediaPlayer().create();
 		console.log("dash-btn");
+		player.initialize(video, "/video/dash/Top_20.mpd", false);
+		player.updateSettings({
+			streaming: {
+				abr: {
+					autoSwitchBitrate: { audio: true, video: true },
+					useDefaultABRRules: true,
+					ABRStrategy: "abrDynamic",
+					additionalAbrRules: {
+						insufficientBufferRule: true,
+						switchHistoryRule: true,
+						droppedFramesRule: true,
+						abandonRequestsRule: true,
+					},
+				},
+				buffer: {
+					fastSwitchEnabled: true,
+				},
+			},
+		});
+		player.on(
+			dashjs.MediaPlayer.events.STREAM_INITIALIZED,
+			function (event, data) {
+				const qualities = player
+					.getBitrateInfoListFor("video")
+					.map((l) => l.height);
 
-		player = dashjs.MediaPlayer().create();
-		player.initialize(video, "/video/cmaf/Top_20.mpd", false);
+				// Auto quality
+				const newSettings = {
+					streaming: { abr: { autoSwitchBitrate: { video: false } } },
+				};
+				player.updateSettings(newSettings);
+				auto = false;
+
+				let qualitiesOptions = document.getElementById("qualitiesOptions");
+				let qualitiesOptionsHTML = "";
+
+				qualities.forEach((quality) => {
+					qualitiesOptionsHTML +=
+						"<li><a class='dropdown-item' onClick=' () => { " +
+						player.setQualityFor("video", quality) +
+						" }>" +
+						quality +
+						"</a>";
+				});
+
+				qualitiesOptions.innerHTML = qualitiesOptionsHTML;
+			}
+		);
 	});
 
 	// CMAF
@@ -303,5 +361,13 @@ function adaptiveStreaming() {
 		let source = document.getElementById("videoSrc");
 		source.src = "/video/cmaf/master.m3u8";
 		source.type = "application/x-mpegURL";
+	});
+}
+
+function updateHLSQuality(newQuality) {
+	window.hls.levels.forEach((level, levelIndex) => {
+		if (level.height === newQuality) {
+			window.hls.currentLevel = levelIndex;
+		}
 	});
 }

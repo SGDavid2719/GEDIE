@@ -154,9 +154,6 @@ function updatePlayButton() {
 //////////////////////////////////////////////////////////
 
 function formatTime(lTimeInSeconds) {
-	console.log("lTimeInSeconds");
-	console.log(lTimeInSeconds);
-
 	if (!isNaN(lTimeInSeconds)) {
 		const lResult = new Date(lTimeInSeconds * 1000).toISOString().substr(11, 8);
 
@@ -315,9 +312,6 @@ function updateFullscreenButton() {
 //////////////////////////////////////////////////////////
 
 function toggleCaptioning() {
-	console.log(lVideo);
-	console.log(lVideo.textTracks);
-
 	// Get all text tracks for the current player.
 	var lTracks = lVideo.textTracks;
 

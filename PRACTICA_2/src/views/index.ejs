@@ -21,16 +21,6 @@
 
 			<div id="video-row" class="row m-0 h-100">
 
-				<!-- <div class="col-12 col-md-4 d-flex justify-content-center">
-					<button id="hls-btn" class="btn btn-secondary">HLS</button>
-				</div>
-				<div class="col-12 col-md-4 d-flex justify-content-center">
-					<button id="dash-btn" class="btn btn-secondary">DASH</button>
-				</div>
-				<div class="col-12 col-md-4 d-flex justify-content-center">
-					<button id="cmaf-btn" class="btn btn-secondary">CMAF</button>
-				</div> -->
-
 				<!-- Good habits to keep controls for users that have JS turned off -->
 				<div id="video-container" class="col-12 px-5 py-2" controls>
 					<div class="row">
@@ -139,11 +129,16 @@
 													aria-haspopup="true" aria-expanded="false" id="settings">
 													<i class="fa-solid fa-gear"></i>
 												</button>
-												<div class="dropdown-menu" aria-labelledby="settings">
-													<a class="dropdown-item" id="hls-btn">HLS</a>
-													<a class="dropdown-item" id="dash-btn">DASH</a>
-													<a class="dropdown-item" id="cmaf-btn">CMAF</a>
-												</div>
+												<ul id="qualitiesDropdown" class="dropdown-menu"
+													aria-labelledby="settings">
+													<li><a class="dropdown-item" id="hls-btn">HLS</a></li>
+													<li><a class="dropdown-item" id="dash-btn">DASH</a></li>
+													<li><a class="dropdown-item" id="cmaf-btn">CMAF</a></li>
+													<li>
+														<hr class="dropdown-divider">
+													</li>
+													<div id="qualitiesOptions"></div>
+												</ul>
 											</div>
 											<div class="col-1 d-flex justify-content-right m-2">
 												<button id="fullscreen-btn" class="btn">
