@@ -21,7 +21,7 @@
 
 			<div id="video-row" class="row m-0 h-100">
 
-				<div class="col-12 col-md-4 d-flex justify-content-center">
+				<!-- <div class="col-12 col-md-4 d-flex justify-content-center">
 					<button id="hls-btn" class="btn btn-secondary">HLS</button>
 				</div>
 				<div class="col-12 col-md-4 d-flex justify-content-center">
@@ -29,7 +29,7 @@
 				</div>
 				<div class="col-12 col-md-4 d-flex justify-content-center">
 					<button id="cmaf-btn" class="btn btn-secondary">CMAF</button>
-				</div>
+				</div> -->
 
 				<!-- Good habits to keep controls for users that have JS turned off -->
 				<div id="video-container" class="col-12 px-5 py-2" controls>
@@ -140,11 +140,9 @@
 													<i class="fa-solid fa-gear"></i>
 												</button>
 												<div class="dropdown-menu" aria-labelledby="settings">
-													<a class="dropdown-item">2160p<span><sup>4k</sup></span></a>
-													<a class="dropdown-item">1440p<span><sup>HD</sup></span></a>
-													<a class="dropdown-item">1080p<span><sup>HD</sup></span></a>
-													<a class="dropdown-item">720p</a>
-													<a class="dropdown-item">480p</a>
+													<a class="dropdown-item" id="hls-btn">HLS</a>
+													<a class="dropdown-item" id="dash-btn">DASH</a>
+													<a class="dropdown-item" id="cmaf-btn">CMAF</a>
 												</div>
 											</div>
 											<div class="col-1 d-flex justify-content-right m-2">

@@ -235,15 +235,16 @@ function goToNextVideo() {
 function adaptiveStreaming() {
 	var video = document.getElementById("video");
 
-	//var player = dashjs.MediaPlayer().create();
-
 	// FORCE DASH (NATIVE)
 	console.log("dash-btn");
-	//player.initialize(video, "/video/dash/Top_20.mpd", false);
+	player = dashjs.MediaPlayer().create();
+	player.initialize(video, "/video/cmaf/Top_20.mpd", false);
 
 	// HLS
 	$("#hls-btn").click(() => {
 		console.log("hls-btn");
+
+		player.destroy();
 
 		var videoSrc = "/video/hls/master.m3u8";
 		if (video.canPlayType("application/vnd.apple.mpegurl")) {
@@ -287,15 +288,20 @@ function adaptiveStreaming() {
 
 	// DASH
 	$("#dash-btn").click(() => {
-		let source = document.getElementById("videoSrc");
 		console.log("dash-btn");
 
-		source.src = "/video/dash/Top_20.mpd";
-		source.type = "application/dash+xml";
+		player = dashjs.MediaPlayer().create();
+		player.initialize(video, "/video/cmaf/Top_20.mpd", false);
 	});
 
 	// CMAF
 	$("#cmaf-btn").click(() => {
+		player.destroy();
+
 		console.log("cmaf-btn");
+
+		let source = document.getElementById("videoSrc");
+		source.src = "/video/cmaf/master.m3u8";
+		source.type = "application/x-mpegURL";
 	});
 }
