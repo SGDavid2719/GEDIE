@@ -2,6 +2,9 @@ const peer = new Peer();
 var currentCall;
 
 myId = null;
+myName = null;
+myColor = null;
+
 peerId = null;
 var conn = null;
 
@@ -62,9 +65,13 @@ peer.on('connection', function (connec) {
     });
 });
 
-peer.on("open", function (id) {
-    document.getElementById("uuid").textContent = "My ID: " + id;
+peer.on("open", async function (id) {
     myId = id;
+    $.post("/users", { user: myId }, function (return_data) {
+        document.getElementById("active-users-div").innerHTML += '<div class="col-md-12">' + return_data[1] + return_data[0] + '</div>'
+        document.getElementById('uuid').innerHTML = "My username and ID: " + return_data[1] + return_data[0] + " - " + id;
+    }, 'json');
+    getActiveUsers()
 });
 
 async function callUser() {
@@ -188,4 +195,38 @@ input.addEventListener("keypress", function (event) {
 function clearChat() {
     var chatdiv = document.getElementById('chat-text-div');
     chatdiv.innerHTML = ''
+}
+
+
+window.onbeforeunload = closingCode;
+function closingCode() {
+
+    $.post("/end", { user: myId }, function (return_data) {
+        alert(return_data.message);
+        console.log("first")
+    }, 'json');
+
+    return null;
+}
+
+
+let active_users = null;
+window.onload = getActiveUsers;
+function getActiveUsers() {
+    console.log(myName)
+    $.get("/active-users", "", function (data) {
+        active_users = data;
+    });
+
+    var idx = 0
+
+    while (active_users[idx] !== undefined) {
+        // <i onclick="connect_peer(' + active_users[idx].id + ')" class="fa-solid fa-link link-peer"></i>
+        document.getElementById("active-users-div").innerHTML += '<div class="col-md-12">' + active_users[idx].color + active_users[idx].name + ` <i onclick='connect_peer(` + JSON.stringify(active_users[idx].id) + `) ' class="fa-solid fa-link link-peer"></i> </div>`
+        idx++
+    }
+}
+
+function connect_peer(peer_id) {
+    alert(peer_id)
 }

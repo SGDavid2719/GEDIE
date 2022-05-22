@@ -6,6 +6,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const Swal = require("sweetalert2");
+const names = require('./names.json')
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -151,4 +152,41 @@ String.prototype.toHHMMSS = function () {
 // listening the server
 app.listen(app.get("port"), () => {
 	console.log("Server on port", app.get("port"));
+});
+
+
+let active_users = new Map();
+
+app.post("/users", urlencodedParser, function (req, res) {
+	let user_id = req.body;
+	user_id = user_id.user;
+
+	const color = names[Math.round(Math.random() * names.length)]['color'];
+	const name = names[Math.round(Math.random() * names.length)]['name'];
+
+	active_users.set(user_id, { name: name, color: color, id: user_id })
+	console.log("Added: " + user_id + " - " + name + " - " + color)
+
+	res.send([name, color])
+});
+
+
+app.post("/end", urlencodedParser, function (req, res) {
+	let user_id = req.body;
+	user_id = user_id.user;
+
+	let user = active_users.get(user_id);
+	active_users.delete(user_id)
+
+	console.log("Removed: " + user_id + " - " + user.name + " - " + user.color)
+});
+
+app.get("/active-users", urlencodedParser, function (req, res) {
+	let users = []
+	active_users.forEach((value, key) => {
+		users.push(value)
+		// res.send(value)
+	})
+
+	res.send(users)
 });
