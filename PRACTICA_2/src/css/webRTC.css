@@ -1,0 +1,19 @@
+#chat-text-div {
+    min-height: 215px;
+    max-height: 215px;
+    overflow: scroll;
+}
+
+#active-users-div {
+    max-height: 300px;
+    overflow: scroll;
+}
+
+#private-chat-input {
+    width: 70%;
+}
+
+.link-peer {
+    color: green;
+    cursor: pointer;
+}
