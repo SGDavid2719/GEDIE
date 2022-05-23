@@ -14,5 +14,39 @@
 			</li>
 		</ul>
 	</div>
+	<button id="showChatButton" type="button" class="btn btn-primary" data-bs-toggle="modal"
+		data-bs-target="#chatModal">
+		Launch demo modal
+	</button>
 </nav>
 <hr />
+
+<!-- Modal -->
+<div class="modal" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="chatModalLabel">Modal title</h5>
+				<button id="closeChatModal" type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-6">
+
+					</div>
+					<div class="col-6">
+
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<form id="userChatForm">
+					<input type="text" class="form-control" name="userMessageText" id="userMessageText"
+						aria-describedby="messageTextHelp">
+				</form>
+				<button id="userChatSendButton" class="btn btn-primary">Send Message</button>
+			</div>
+		</div>
+	</div>
+</div>

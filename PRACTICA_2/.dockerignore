@@ -1,2 +1,3 @@
 node_modules
-npm-debug.logS
+npm-debug.log
+src/public/video

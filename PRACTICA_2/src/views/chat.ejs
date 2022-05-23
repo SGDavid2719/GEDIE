@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%=title%>
+    </title>
+    <%- include('partials/head'); -%>
+        <link rel="stylesheet" href="/index.css" />
+</head>
+
+<body>
+
+    <div class="p-4">
+        <div class="row" style="height: 90vh">
+            <div class="col-6">
+                <p>HOLA</p>
+            </div>
+            <div class="col-6">
+                <p>HOLA</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <input type="text" id="receiver-id" title="Input the ID from receive.html" class="form-control">
+            </div>
+            <div class="col-1">
+                <button id="connect-button" class="btn btn-secondary">Connect</button>
+            </div>
+            <div class="col-5">
+                <input type="text" id="receiver-text" title="Message" class="form-control">
+            </div>
+            <div class="col-1">
+                <button id="text-button" class="btn btn-secondary">Send</button>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('partials/footer'); -%>
+
+        <script src="/send.js"></script>
+</body>
+
+</html>

@@ -11,4 +11,9 @@ router.get("/editorpage", (req, res) => {
 	res.render("editor", { title: "Editor" });
 });
 
+// Set path to editor page
+router.get("/chatpage", (req, res) => {
+	res.render("chat", { title: "Chat" });
+});
+
 module.exports = router;

@@ -19,6 +19,7 @@
 
 		<div id="indexContainer" style="margin-bottom: 10px">
 			<div id="video-row" class="row m-0 h-100">
+
 				<!-- Good habits to keep controls for users that have JS turned off -->
 				<div id="video-container" class="col-12 px-5 py-2" controls>
 					<div class="row">
@@ -127,13 +128,16 @@
 													aria-haspopup="true" aria-expanded="false" id="settings">
 													<i class="fa-solid fa-gear"></i>
 												</button>
-												<div class="dropdown-menu" aria-labelledby="settings">
-													<a class="dropdown-item">2160p<span><sup>4k</sup></span></a>
-													<a class="dropdown-item">1440p<span><sup>HD</sup></span></a>
-													<a class="dropdown-item">1080p<span><sup>HD</sup></span></a>
-													<a class="dropdown-item">720p</a>
-													<a class="dropdown-item">480p</a>
-												</div>
+												<ul id="qualitiesDropdown" class="dropdown-menu"
+													aria-labelledby="settings">
+													<li><a class="dropdown-item" id="hls-btn">HLS</a></li>
+													<li><a class="dropdown-item" id="dash-btn">DASH</a></li>
+													<li><a class="dropdown-item" id="cmaf-btn">CMAF</a></li>
+													<li>
+														<hr class="dropdown-divider">
+													</li>
+													<div id="qualitiesOptions"></div>
+												</ul>
 											</div>
 											<div class="col-1 d-flex justify-content-right m-2">
 												<button id="fullscreen-btn" class="btn">

@@ -13,6 +13,7 @@ $(() => {
 	try {
 		loadVideo();
 		getCurrentCueData();
+		adaptiveStreaming();
 	} catch (lException) {
 		console.log(lException);
 	}
@@ -34,7 +35,8 @@ function loadVideo() {
 		lVideo_Can_Be_Played = lVideo_Element.canPlayType("video/mp4");
 		if (lVideo_Can_Be_Played) {
 			// Set video
-			lSource.setAttribute("src", lSong);
+			//lSource.setAttribute("src", lSong);
+			lSource.setAttribute("id", "videoSrc");
 			lSource.setAttribute("type", "video/mp4");
 			// Set cover
 			let lCover = "/images/";
@@ -228,4 +230,144 @@ function goToNextVideo() {
 	if (str.text != undefined) {
 		setActiveCue("Top: " + nextCue + ". " + JSON.parse(str.text).title);
 	}
+}
+
+function adaptiveStreaming() {
+	var video = document.getElementById("video");
+
+	// HLS
+	$("#hls-btn").click(() => {
+		console.log("hls-btn");
+
+		player.destroy();
+
+		var videoSrc = "/video/hls/master.m3u8";
+		if (video.canPlayType("application/vnd.apple.mpegurl")) {
+			// Apple native support
+			video.src = videoSrc;
+		} else if (Hls.isSupported()) {
+			// Others
+			var hls = new Hls();
+			// bind them together
+			hls.attachMedia(video);
+			hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+				console.log("video and hls.js are now bound together !");
+				hls.loadSource(videoSrc);
+				hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+					console.log(
+						"manifest loaded, found " + data.levels.length + " quality level"
+					);
+
+					const qualities = hls.levels.map((level) => level.height);
+
+					let qualitiesOptions = document.getElementById("qualitiesOptions");
+					let qualitiesOptionsHTML = "";
+
+					qualities.forEach((quality) => {
+						qualitiesOptionsHTML +=
+							"<li><a class='dropdown-item' onClick='updateHLSQuality(" +
+							quality +
+							")'>" +
+							quality +
+							"</a>";
+					});
+
+					qualitiesOptions.innerHTML = qualitiesOptionsHTML;
+				});
+			});
+			hls.on(Hls.Events.ERROR, function (event, data) {
+				if (data.fatal) {
+					switch (data.type) {
+						case Hls.ErrorTypes.NETWORK_ERROR:
+							// try to recover network error
+							console.log("fatal network error encountered, try to recover");
+							hls.startLoad();
+							break;
+						case Hls.ErrorTypes.MEDIA_ERROR:
+							console.log("fatal media error encountered, try to recover");
+							hls.recoverMediaError();
+							break;
+						default:
+							// cannot recover
+							hls.destroy();
+							break;
+					}
+				}
+			});
+			window.hls = hls;
+		}
+	});
+
+	// DASH
+	$("#dash-btn").click(() => {
+		var player = dashjs.MediaPlayer().create();
+		console.log("dash-btn");
+		player.initialize(video, "/video/dash/Top_20.mpd", false);
+		player.updateSettings({
+			streaming: {
+				abr: {
+					autoSwitchBitrate: { audio: true, video: true },
+					useDefaultABRRules: true,
+					ABRStrategy: "abrDynamic",
+					additionalAbrRules: {
+						insufficientBufferRule: true,
+						switchHistoryRule: true,
+						droppedFramesRule: true,
+						abandonRequestsRule: true,
+					},
+				},
+				buffer: {
+					fastSwitchEnabled: true,
+				},
+			},
+		});
+		player.on(
+			dashjs.MediaPlayer.events.STREAM_INITIALIZED,
+			function (event, data) {
+				const qualities = player
+					.getBitrateInfoListFor("video")
+					.map((l) => l.height);
+
+				// Auto quality
+				const newSettings = {
+					streaming: { abr: { autoSwitchBitrate: { video: false } } },
+				};
+				player.updateSettings(newSettings);
+				auto = false;
+
+				let qualitiesOptions = document.getElementById("qualitiesOptions");
+				let qualitiesOptionsHTML = "";
+
+				qualities.forEach((quality) => {
+					qualitiesOptionsHTML +=
+						"<li><a class='dropdown-item' onClick=' () => { " +
+						player.setQualityFor("video", quality) +
+						" }>" +
+						quality +
+						"</a>";
+				});
+
+				qualitiesOptions.innerHTML = qualitiesOptionsHTML;
+			}
+		);
+	});
+
+	// CMAF
+	$("#cmaf-btn").click(() => {
+		player.destroy();
+
+		console.log("cmaf-btn");
+
+		let source = document.getElementById("videoSrc");
+		source.src = "/video/cmaf/master.m3u8";
+		source.type = "application/x-mpegURL";
+	});
+}
+
+function updateHLSQuality(newQuality) {
+	window.hls.levels.forEach((level, levelIndex) => {
+		if (level.height === newQuality) {
+			window.hls.currentLevel = levelIndex;
+		}
+	});
 }
